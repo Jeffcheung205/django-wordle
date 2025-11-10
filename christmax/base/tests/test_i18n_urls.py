@@ -29,6 +29,8 @@ def test_chinese_url_resolves(client):
 
 def test_url_name_conflicts():
     """English and Chinese URL names should map to different paths."""
+    with override('en'):
+        english_url = reverse('home')
     with override('zh'):
         chinese_url = reverse('home_zh')
-    assert reverse('home') != chinese_url
+    assert english_url != chinese_url

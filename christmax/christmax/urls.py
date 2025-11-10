@@ -16,17 +16,18 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import path
+from django.views.i18n import JavaScriptCatalog
 from django.conf.urls.i18n import i18n_patterns
 from base.views import HomeView
 
-# Non-i18n URLs
-urlpatterns = [path('admin/', admin.site.urls)]
+urlpatterns = [
+    path('admin/', admin.site.urls),
+]
 
-# English URLs (no prefix)
-urlpatterns += [path('', HomeView.as_view(), name='home')]
-
-# Chinese URLs (with /zh/ prefix)
 urlpatterns += i18n_patterns(
-    path('', HomeView.as_view(), name='home_zh'), prefix_default_language=False
+    path('jsi18n/', JavaScriptCatalog.as_view(packages=['base']), name='javascript-catalog'),
+    path('', HomeView.as_view(), name='home'),
+    path('', HomeView.as_view(), name='home_zh'),
+    prefix_default_language=False,
 )

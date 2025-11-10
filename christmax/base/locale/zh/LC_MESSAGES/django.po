@@ -58,3 +58,6 @@ msgstr "問答分類"
 
 msgid "All rights reserved."
 msgstr "版權所有。"
+
+msgid "Welcome to learn new things"
+msgstr "歡迎來探索新知"

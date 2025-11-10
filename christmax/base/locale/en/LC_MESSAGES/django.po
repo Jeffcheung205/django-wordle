@@ -58,3 +58,6 @@ msgstr "Quiz Categories"
 
 msgid "All rights reserved."
 msgstr "All rights reserved."
+
+msgid "Welcome to learn new things"
+msgstr "Welcome to learn new things"
