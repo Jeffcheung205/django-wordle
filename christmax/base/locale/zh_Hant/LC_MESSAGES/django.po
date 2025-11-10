@@ -1,0 +1,60 @@
+# Chinese (Traditional) translations for 天天好學 - FirstToBuzz
+# This file is distributed under the same license as the PACKAGE package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_Hant\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Home"
+msgstr "首頁"
+
+msgid "Wordle"
+msgstr "單詞猜謎"
+
+msgid "Quiz"
+msgstr "知識問答"
+
+msgid "Leaderboard"
+msgstr "排行榜"
+
+msgid "Profile"
+msgstr "個人資料"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "Logout"
+msgstr "登出"
+
+msgid "Login"
+msgstr "登入"
+
+msgid "Register"
+msgstr "註冊"
+
+msgid "Language"
+msgstr "語言"
+
+msgid "Educational gaming platform for learning programming"
+msgstr "學習程式設計的教育遊戲平台"
+
+msgid "Quick Links"
+msgstr "快速連結"
+
+msgid "Daily Wordle"
+msgstr "每日單詞猜謎"
+
+msgid "Quiz Categories"
+msgstr "問答分類"
+
+msgid "All rights reserved."
+msgstr "版權所有。"
