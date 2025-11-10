@@ -1,8 +1,481 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
-<section class="d-flex flex-column align-items-center justify-content-center py-5">
-    <h1 class="display-3 text-center mb-4">Hello world!</h1>
-    <p id="welcome-banner" class="lead text-center text-muted"></p>
+
+<!-- Hero Section -->
+<section class="bg-primary text-white py-5">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-3 fw-bold mb-4">{% trans "AI Took Our Jobs? Let's Learn Django Anyway!" %}</h1>
+                <p class="lead mb-4">{% trans "100+ Practice Questions • Instant Results • Track Progress" %}</p>
+                <p class="fs-5 mb-4">{% trans "Because AI can't practice for you (yet)" %}</p>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="#sample-quiz" class="btn btn-light btn-lg px-4">
+                        <i class="bi bi-play-circle me-2"></i>{% trans "Try Sample Questions" %}
+                    </a>
+                    <a href="#pricing" class="btn btn-outline-light btn-lg px-4">
+                        {% trans "View Pricing" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+
+<!-- User Stories Carousel -->
+<section class="py-5 bg-body-secondary">
+    <div class="container">
+        <h2 class="text-center mb-5 display-6">{% trans "Real Stories from Real Learners" %}</h2>
+
+        <div id="userStoriesCarousel" class="carousel slide carousel-dark" data-bs-ride="carousel">
+            <!-- Indicators -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#userStoriesCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#userStoriesCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#userStoriesCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#userStoriesCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#userStoriesCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                <button type="button" data-bs-target="#userStoriesCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
+            </div>
+
+            <!-- Slides -->
+            <div class="carousel-inner">
+                <!-- Story 1: Student facing exam -->
+                <div class="carousel-item active">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body text-center p-5">
+                                    <i class="bi bi-mortarboard-fill text-primary display-1 mb-3"></i>
+                                    <blockquote class="blockquote mb-4">
+                                        <p class="fs-5">{% trans "My Django exam is next week and I was panicking! Found 100+ practice questions here that exactly match my syllabus. Now I feel confident to pass!" %}</p>
+                                    </blockquote>
+                                    <footer class="blockquote-footer">
+                                        <strong>{% trans "Chan Tai Man" %}</strong> - {% trans "CS Student, HKU" %}
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story 2: Developer preparing for interview -->
+                <div class="carousel-item">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body text-center p-5">
+                                    <i class="bi bi-code-slash text-success display-1 mb-3"></i>
+                                    <blockquote class="blockquote mb-4">
+                                        <p class="fs-5">{% trans "Preparing for my first Python developer interview. The Django questions here are exactly what interviewers ask. Already feeling more prepared!" %}</p>
+                                    </blockquote>
+                                    <footer class="blockquote-footer">
+                                        <strong>{% trans "Lisa Wong" %}</strong> - {% trans "Junior Developer" %}
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story 3: University teacher looking for quiz resources -->
+                <div class="carousel-item">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body text-center p-5">
+                                    <i class="bi bi-person-workspace text-warning display-1 mb-3"></i>
+                                    <blockquote class="blockquote mb-4">
+                                        <p class="fs-5">{% trans "Finally found reliable Python quiz questions for my university students! The categorization helps me assign relevant practice for different topics." %}</p>
+                                    </blockquote>
+                                    <footer class="blockquote-footer">
+                                        <strong>{% trans "Mr. Lee" %}</strong> - {% trans "Computer Science Teacher, CUHK" %}
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story 4: Secondary school teacher -->
+                <div class="carousel-item">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body text-center p-5">
+                                    <i class="bi bi-book-half text-info display-1 mb-3"></i>
+                                    <blockquote class="blockquote mb-4">
+                                        <p class="fs-5">{% trans "As a secondary school ICT teacher, I needed engaging Python resources for my F.4-F.6 students. This platform has age-appropriate questions that make programming fun!" %}</p>
+                                    </blockquote>
+                                    <footer class="blockquote-footer">
+                                        <strong>{% trans "Ms. Chen" %}</strong> - {% trans "ICT Teacher, Secondary School" %}
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story 5: Entrepreneur building web app -->
+                <div class="carousel-item">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body text-center p-5">
+                                    <i class="bi bi-rocket-takeoff-fill text-danger display-1 mb-3"></i>
+                                    <blockquote class="blockquote mb-4">
+                                        <p class="fs-5">{% trans "I need to launch my business online fast! Learning Django here helped me build a production-ready web app in weeks instead of months. Now my business has a professional online presence!" %}</p>
+                                    </blockquote>
+                                    <footer class="blockquote-footer">
+                                        <strong>{% trans "James Lau" %}</strong> - {% trans "Small Business Owner" %}
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story 6: Career restart through freelancing -->
+                <div class="carousel-item">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body text-center p-5">
+                                    <i class="bi bi-arrow-up-circle-fill text-success display-1 mb-3"></i>
+                                    <blockquote class="blockquote mb-4">
+                                        <p class="fs-5">{% trans "After losing everything, I needed to rebuild my life. Learning Django here gave me the skills to start freelancing. Now I have my first clients and a path forward!" %}</p>
+                                    </blockquote>
+                                    <footer class="blockquote-footer">
+                                        <strong>{% trans "Michael Chan" %}</strong> - {% trans "Aspiring Freelance Developer" %}
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#userStoriesCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">{% trans "Previous" %}</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#userStoriesCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">{% trans "Next" %}</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5 display-6">{% trans "Why Choose 天天好學?" %}</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="display-4 mb-3">📚</div>
+                        <h3 class="h5 mb-3">{% trans "100+ Questions Bank" %}</h3>
+                        <p class="text-muted">{% trans "Comprehensive collection of Django and Python questions covering all topics from basics to advanced concepts." %}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="display-4 mb-3">🎯</div>
+                        <h3 class="h5 mb-3">{% trans "Smart Categories" %}</h3>
+                        <p class="text-muted">{% trans "Well-organized topics: Django Models, Views, Templates, Python Basics, OOP, and more." %}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="display-4 mb-3">⚡</div>
+                        <h3 class="h5 mb-3">{% trans "Instant Feedback" %}</h3>
+                        <p class="text-muted">{% trans "Get immediate results with detailed explanations. Learn from your mistakes right away." %}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="display-4 mb-3">📊</div>
+                        <h3 class="h5 mb-3">{% trans "Progress Tracking" %}</h3>
+                        <p class="text-muted">{% trans "Monitor your improvement with detailed analytics and performance reports." %}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="display-4 mb-3">🏆</div>
+                        <h3 class="h5 mb-3">{% trans "Leaderboards" %}</h3>
+                        <p class="text-muted">{% trans "Compete with other learners and climb the rankings to win prizes." %}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="display-4 mb-3">🎮</div>
+                        <h3 class="h5 mb-3">{% trans "Gamified Learning" %}</h3>
+                        <p class="text-muted">{% trans "Earn badges, unlock achievements, and make learning fun and engaging." %}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sample Quiz Section -->
+<section id="sample-quiz" class="py-5 bg-body-secondary">
+    <div class="container">
+        <h2 class="text-center mb-4 display-6">{% trans "Try a Sample Question" %}</h2>
+        <p class="text-center text-muted mb-5">{% trans "Experience the quality of our quiz questions" %}</p>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Sample Question 1 -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="badge bg-primary me-2">Django</span>
+                            <span class="badge bg-secondary">Intermediate</span>
+                        </div>
+                        <h4 class="mb-4">{% trans "What does the @login_required decorator do in Django?" %}</h4>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="q1" id="q1a" value="a">
+                            <label class="form-check-label" for="q1a">
+                                {% trans "It encrypts user passwords before saving to database" %}
+                            </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="q1" id="q1b" value="b">
+                            <label class="form-check-label" for="q1b">
+                                {% trans "It restricts access to a view to authenticated users only" %}
+                            </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="q1" id="q1c" value="c">
+                            <label class="form-check-label" for="q1c">
+                                {% trans "It creates a login form automatically" %}
+                            </label>
+                        </div>
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="radio" name="q1" id="q1d" value="d">
+                            <label class="form-check-label" for="q1d">
+                                {% trans "It logs all user activities" %}
+                            </label>
+                        </div>
+                        <button class="btn btn-primary" onclick="checkAnswer(1, 'b')">{% trans "Check Answer" %}</button>
+                        <div id="result1" class="mt-3" style="display: none;"></div>
+                    </div>
+                </div>
+
+                <!-- Sample Question 2 -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="badge bg-success me-2">Python</span>
+                            <span class="badge bg-secondary">Basic</span>
+                        </div>
+                        <h4 class="mb-4">{% trans "Which of the following is NOT a valid Python data type?" %}</h4>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="q2" id="q2a" value="a">
+                            <label class="form-check-label" for="q2a">
+                                {% trans "list" %}
+                            </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="q2" id="q2b" value="b">
+                            <label class="form-check-label" for="q2b">
+                                {% trans "tuple" %}
+                            </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="q2" id="q2c" value="c">
+                            <label class="form-check-label" for="q2c">
+                                {% trans "array" %}
+                            </label>
+                        </div>
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="radio" name="q2" id="q2d" value="d">
+                            <label class="form-check-label" for="q2d">
+                                {% trans "dictionary" %}
+                            </label>
+                        </div>
+                        <button class="btn btn-primary" onclick="checkAnswer(2, 'c')">{% trans "Check Answer" %}</button>
+                        <div id="result2" class="mt-3" style="display: none;"></div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <p class="lead mb-3">{% trans "Want access to 100+ more questions?" %}</p>
+                    <a href="#pricing" class="btn btn-primary btn-lg">{% trans "View Membership Plans" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Competition Section -->
+<section class="py-5 bg-dark text-light" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <div class="container text-center">
+        <h2 class="display-5 fw-bold mb-4">🏆 {% trans "Win the Cup & Earn Prizes!" %}</h2>
+        <p class="lead mb-5">{% trans "Compete with other learners and win exclusive rewards" %}</p>
+
+        <div class="row g-4 mb-4">
+            <div class="col-md-4">
+                <div class="card bg-dark bg-opacity-10 border-0 text-light h-100">
+                    <div class="card-body p-4">
+                        <div class="display-3 mb-3">🥇</div>
+                        <h3 class="h4 mb-3">{% trans "Monthly Champion" %}</h3>
+                        <p class="mb-0">{% trans "Top scorer wins exclusive prizes and recognition" %}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-dark bg-opacity-10 border-0 text-light h-100">
+                    <div class="card-body p-4">
+                        <div class="display-3 mb-3">🎖️</div>
+                        <h3 class="h4 mb-3">{% trans "Achievement Badges" %}</h3>
+                        <p class="mb-0">{% trans "Unlock special badges for milestones and perfect scores" %}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-dark bg-opacity-10 border-0 text-light h-100">
+                    <div class="card-body p-4">
+                        <div class="display-3 mb-3">⭐</div>
+                        <h3 class="h4 mb-3">{% trans "Premium Features" %}</h3>
+                        <p class="mb-0">{% trans "Winners get free premium access and exclusive content" %}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Section -->
+<section id="pricing" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4 display-6">{% trans "Simple, Transparent Pricing" %}</h2>
+        <p class="text-center text-muted mb-5">{% trans "Choose the plan that's right for you" %}</p>
+
+        <div class="row g-4 justify-content-center">
+            <!-- Free Plan -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="card-title mb-3">{% trans "Free" %}</h3>
+                        <div class="display-4 mb-3">$0</div>
+                        <p class="text-muted mb-4">{% trans "Perfect to get started" %}</p>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>{% trans "5 quiz attempts per day" %}</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>{% trans "Basic categories access" %}</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>{% trans "View leaderboard" %}</li>
+                            <li class="mb-2 text-muted"><i class="bi bi-x-circle-fill me-2"></i>{% trans "No progress tracking" %}</li>
+                            <li class="mb-2 text-muted"><i class="bi bi-x-circle-fill me-2"></i>{% trans "No competition entry" %}</li>
+                        </ul>
+                        <button class="btn btn-outline-primary w-100">{% trans "Current Plan" %}</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Premium Plan (Most Popular) -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 shadow border-primary" style="border-width: 2px;">
+                    <div class="card-header bg-primary text-white text-center py-3">
+                        <span class="badge bg-warning text-dark">{% trans "MOST POPULAR" %}</span>
+                    </div>
+                    <div class="card-body p-4">
+                        <h3 class="card-title mb-3">{% trans "Premium" %}</h3>
+                        <div class="mb-3">
+                            <span class="display-4">HK$20</span>
+                            <span class="text-muted">/{% trans "month" %}</span>
+                        </div>
+                        <p class="text-muted mb-4">{% trans "For serious learners" %}</p>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>{% trans "Unlimited quiz attempts" %}</strong></li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>{% trans "All 100+ questions" %}</strong></li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>{% trans "Enter competitions" %}</strong></li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>{% trans "Progress tracking" %}</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>{% trans "Detailed analytics" %}</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>{% trans "Certificate of completion" %}</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>{% trans "Ad-free experience" %}</li>
+                        </ul>
+                        <button class="btn btn-primary w-100 btn-lg">{% trans "Upgrade Now" %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Money-back Guarantee -->
+        <div class="row mt-4">
+            <div class="col-lg-8 mx-auto">
+                <div class="alert alert-info border-0" role="alert">
+                    <div class="text-center">
+                        <i class="bi bi-shield-check fs-3 me-2"></i>
+                        <strong>{% trans "7-day money-back guarantee" %}</strong> • {% trans "Cancel anytime" %} • {% trans "No hidden fees" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Final CTA Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="display-5 fw-bold mb-4">{% trans "Ready to Ace Your Exam?" %}</h2>
+        <p class="lead mb-4">{% trans "Join 500+ students who are already practicing with us" %}</p>
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="d-grid gap-3">
+                    <a href="#" class="btn btn-light btn-lg">
+                        <i class="bi bi-person-plus me-2"></i>{% trans "Register Free Account" %}
+                    </a>
+                    <p class="mb-0 small">{% trans "No credit card required • Start practicing immediately" %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quiz Answer Check Script -->
+<script>
+function checkAnswer(questionNum, correctAnswer) {
+    const selectedAnswer = document.querySelector(`input[name="q${questionNum}"]:checked`);
+    const resultDiv = document.getElementById(`result${questionNum}`);
+
+    if (!selectedAnswer) {
+        resultDiv.innerHTML = '<div class="alert alert-warning">{% trans "Please select an answer first" %}</div>';
+        resultDiv.style.display = 'block';
+        return;
+    }
+
+    if (selectedAnswer.value === correctAnswer) {
+        resultDiv.innerHTML = '<div class="alert alert-success"><i class="bi bi-check-circle-fill me-2"></i><strong>{% trans "Correct!" %}</strong> {% trans "Great job! This is the right answer." %}</div>';
+    } else {
+        resultDiv.innerHTML = '<div class="alert alert-danger"><i class="bi bi-x-circle-fill me-2"></i><strong>{% trans "Incorrect." %}</strong> {% trans "Try again or sign up to see detailed explanations." %}</div>';
+    }
+    resultDiv.style.display = 'block';
+}
+
+// Auto-play carousel with pause on hover
+document.addEventListener('DOMContentLoaded', function() {
+    const carousel = new bootstrap.Carousel(document.getElementById('userStoriesCarousel'), {
+        interval: 5000,
+        wrap: true,
+        pause: 'hover'
+    });
+});
+</script>
+
 {% endblock %}

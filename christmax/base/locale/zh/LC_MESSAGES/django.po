@@ -61,3 +61,289 @@ msgstr "版權所有。"
 
 msgid "Welcome to learn new things"
 msgstr "歡迎來探索新知"
+
+# Landing Page Translations
+msgid "AI Took Our Jobs? Let's Learn Django Anyway!"
+msgstr "AI 搶走我們的工作？還是學 Django 吧！"
+
+msgid "100+ Practice Questions • Instant Results • Track Progress"
+msgstr "100+ 練習題目 • 即時結果 • 追蹤進度"
+
+msgid "Because AI can't practice for you (yet)"
+msgstr "因為 AI 還不能替你練習（暫時）。"
+
+msgid "Try Sample Questions"
+msgstr "試做範例題目"
+
+msgid "View Pricing"
+msgstr "查看價格"
+
+msgid "Real Stories from Real Learners"
+msgstr "真實學員的真實故事"
+
+msgid "My Django exam is next week and I was panicking! Found 100+ practice questions here that exactly match my syllabus. Now I feel confident to pass!"
+msgstr "我下週就要考 Django 了，本來很慌張！在這裡找到 100+ 道練習題，完全符合我的課程大綱。現在我有信心通過考試了！"
+
+msgid "Chan Tai Man"
+msgstr "陳大文"
+
+msgid "CS Student, HKU"
+msgstr "香港大學電腦科學系學生"
+
+msgid "Preparing for my first Python developer interview. The Django questions here are exactly what interviewers ask. Already feeling more prepared!"
+msgstr "正在準備我的第一次 Python 開發人員面試。這裡的 Django 問題正是面試官會問的。已經感覺更有準備了！"
+
+msgid "Lisa Wong"
+msgstr "黃麗莎"
+
+msgid "Junior Developer"
+msgstr "初級開發人員"
+
+msgid "Finally found reliable Python quiz questions for my university students! The categorization helps me assign relevant practice for different topics."
+msgstr "終於找到可靠的 Python 測驗題目給我的大學生！分類功能幫助我為不同主題指派相關練習。"
+
+msgid "Mr. Lee"
+msgstr "李老師"
+
+msgid "Computer Science Teacher, CUHK"
+msgstr "香港中文大學電腦科學教師"
+
+msgid "As a secondary school ICT teacher, I needed engaging Python resources for my F.4-F.6 students. This platform has age-appropriate questions that make programming fun!"
+msgstr "作為一名中學 ICT 教師，我需要為中四至中六學生準備有趣的 Python 教材。這個平台有適合年齡的題目，讓編程變得有趣！"
+
+msgid "Ms. Chen"
+msgstr "陳老師"
+
+msgid "ICT Teacher, Secondary School"
+msgstr "中學 ICT 教師"
+
+msgid "I need to launch my business online fast! Learning Django here helped me build a production-ready web app in weeks instead of months. Now my business has a professional online presence!"
+msgstr "我需要快速在網上推出我的業務！在這裡學習 Django 幫助我在幾週內（而不是幾個月）建立了一個可投入生產的網頁應用程式。現在我的業務有了專業的線上形象！"
+
+msgid "James Lau"
+msgstr "劉家明"
+
+msgid "Small Business Owner"
+msgstr "小型企業老闆"
+
+msgid "After losing everything, I needed to rebuild my life. Learning Django here gave me the skills to start freelancing. Now I have my first clients and a path forward!"
+msgstr "失去一切後，我需要重建我的人生。在這裡學習 Django 讓我獲得了開始接案的技能。現在我有了第一批客戶和前進的道路！"
+
+msgid "Michael Chan"
+msgstr "陳志強"
+
+msgid "Aspiring Freelance Developer"
+msgstr "有志成為自由工作者的開發人員"
+
+msgid "Previous"
+msgstr "上一個"
+
+msgid "Next"
+msgstr "下一個"
+
+msgid "Why Choose 天天好學?"
+msgstr "為什麼選擇天天好學？"
+
+msgid "100+ Questions Bank"
+msgstr "100+ 題庫"
+
+msgid "Comprehensive collection of Django and Python questions covering all topics from basics to advanced concepts."
+msgstr "全面收錄 Django 和 Python 題目，涵蓋從基礎到進階的所有主題。"
+
+msgid "Smart Categories"
+msgstr "智能分類"
+
+msgid "Well-organized topics: Django Models, Views, Templates, Python Basics, OOP, and more."
+msgstr "精心組織的主題：Django Models、Views、Templates、Python 基礎、OOP 等。"
+
+msgid "Instant Feedback"
+msgstr "即時反饋"
+
+msgid "Get immediate results with detailed explanations. Learn from your mistakes right away."
+msgstr "立即獲得詳細解釋的結果。馬上從錯誤中學習。"
+
+msgid "Progress Tracking"
+msgstr "進度追蹤"
+
+msgid "Monitor your improvement with detailed analytics and performance reports."
+msgstr "通過詳細的分析和成績報告監控你的進步。"
+
+msgid "Leaderboards"
+msgstr "排行榜"
+
+msgid "Compete with other learners and climb the rankings to win prizes."
+msgstr "與其他學習者競爭，攀登排行榜贏取獎品。"
+
+msgid "Gamified Learning"
+msgstr "遊戲化學習"
+
+msgid "Earn badges, unlock achievements, and make learning fun and engaging."
+msgstr "賺取徽章，解鎖成就，讓學習變得有趣又吸引人。"
+
+msgid "Try a Sample Question"
+msgstr "試做範例題目"
+
+msgid "Experience the quality of our quiz questions"
+msgstr "體驗我們測驗題目的品質"
+
+msgid "What does the @login_required decorator do in Django?"
+msgstr "Django 中的 @login_required 裝飾器有什麼作用？"
+
+msgid "It encrypts user passwords before saving to database"
+msgstr "在保存到資料庫之前加密用戶密碼"
+
+msgid "It restricts access to a view to authenticated users only"
+msgstr "限制只有經過身份驗證的用戶才能訪問視圖"
+
+msgid "It creates a login form automatically"
+msgstr "自動創建登入表單"
+
+msgid "It logs all user activities"
+msgstr "記錄所有用戶活動"
+
+msgid "Check Answer"
+msgstr "檢查答案"
+
+msgid "Which of the following is NOT a valid Python data type?"
+msgstr "以下哪一個不是有效的 Python 資料型別？"
+
+msgid "list"
+msgstr "list（串列）"
+
+msgid "tuple"
+msgstr "tuple（元組）"
+
+msgid "array"
+msgstr "array（陣列）"
+
+msgid "dictionary"
+msgstr "dictionary（字典）"
+
+msgid "Want access to 100+ more questions?"
+msgstr "想要存取 100+ 更多題目嗎？"
+
+msgid "View Membership Plans"
+msgstr "查看會員方案"
+
+msgid "Win the Cup & Earn Prizes!"
+msgstr "贏得獎盃並賺取獎品！"
+
+msgid "Compete with other learners and win exclusive rewards"
+msgstr "與其他學習者競爭並贏得獨家獎勵"
+
+msgid "Monthly Champion"
+msgstr "月度冠軍"
+
+msgid "Top scorer wins exclusive prizes and recognition"
+msgstr "最高分者贏得獨家獎品和認可"
+
+msgid "Achievement Badges"
+msgstr "成就徽章"
+
+msgid "Unlock special badges for milestones and perfect scores"
+msgstr "解鎖里程碑和滿分的特別徽章"
+
+msgid "Premium Features"
+msgstr "高級功能"
+
+msgid "Winners get free premium access and exclusive content"
+msgstr "獲勝者獲得免費高級存取權和獨家內容"
+
+msgid "Simple, Transparent Pricing"
+msgstr "簡單透明的價格"
+
+msgid "Choose the plan that's right for you"
+msgstr "選擇適合你的方案"
+
+msgid "Free"
+msgstr "免費"
+
+msgid "Perfect to get started"
+msgstr "完美入門"
+
+msgid "5 quiz attempts per day"
+msgstr "每天 5 次測驗機會"
+
+msgid "Basic categories access"
+msgstr "基本分類存取"
+
+msgid "View leaderboard"
+msgstr "查看排行榜"
+
+msgid "No progress tracking"
+msgstr "無進度追蹤"
+
+msgid "No competition entry"
+msgstr "無法參加競賽"
+
+msgid "Current Plan"
+msgstr "當前方案"
+
+msgid "Premium"
+msgstr "高級會員"
+
+msgid "MOST POPULAR"
+msgstr "最受歡迎"
+
+msgid "month"
+msgstr "月"
+
+msgid "For serious learners"
+msgstr "認真學習者適用"
+
+msgid "Unlimited quiz attempts"
+msgstr "無限測驗機會"
+
+msgid "All 100+ questions"
+msgstr "全部 100+ 題目"
+
+msgid "Enter competitions"
+msgstr "參加競賽"
+
+msgid "Detailed analytics"
+msgstr "詳細分析"
+
+msgid "Certificate of completion"
+msgstr "完成證書"
+
+msgid "Ad-free experience"
+msgstr "無廣告體驗"
+
+msgid "Upgrade Now"
+msgstr "立即升級"
+
+msgid "7-day money-back guarantee"
+msgstr "7 天退款保證"
+
+msgid "Cancel anytime"
+msgstr "隨時取消"
+
+msgid "No hidden fees"
+msgstr "無隱藏費用"
+
+msgid "Ready to Ace Your Exam?"
+msgstr "準備好輕鬆通過考試了嗎？"
+
+msgid "Join 500+ students who are already practicing with us"
+msgstr "加入 500+ 位已經在與我們一起練習的學生"
+
+msgid "Register Free Account"
+msgstr "註冊免費帳戶"
+
+msgid "No credit card required • Start practicing immediately"
+msgstr "無需信用卡 • 立即開始練習"
+
+msgid "Please select an answer first"
+msgstr "請先選擇一個答案"
+
+msgid "Correct!"
+msgstr "正確！"
+
+msgid "Great job! This is the right answer."
+msgstr "做得好！這是正確答案。"
+
+msgid "Incorrect."
+msgstr "不正確。"
+
+msgid "Try again or sign up to see detailed explanations."
+msgstr "再試一次或註冊以查看詳細解釋。"
