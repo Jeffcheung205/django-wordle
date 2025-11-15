@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.views.i18n import JavaScriptCatalog
 from django.conf.urls.i18n import i18n_patterns
 from base.views import HomeView
@@ -31,3 +31,11 @@ urlpatterns += i18n_patterns(
     path('', HomeView.as_view(), name='home_zh'),
     prefix_default_language=False,
 )
+
+from django.conf import settings
+
+if settings.DEBUG:
+  if "debug_toolbar" in settings.INSTALLED_APPS:
+      import debug_toolbar
+      urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
+
