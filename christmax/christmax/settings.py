@@ -41,14 +41,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.google',
+
     'base',
+    'users',
 ]
 
 if DEBUG:
-    INSTALLED_APPS += [
-        'debug_toolbar',
-        'django_extensions',
-    ]
+    INSTALLED_APPS += [ 'debug_toolbar', 'django_extensions', ]
 
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -60,6 +64,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'christmax.urls'
@@ -67,7 +73,10 @@ ROOT_URLCONF = 'christmax.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'base' / 'templates'],
+        'DIRS': [
+            BASE_DIR / 'base' / 'templates',
+            BASE_DIR / 'users' / 'templates', # for overriding allauth default login.html etc
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,6 +86,13 @@ TEMPLATES = [
             ]
         },
     }
+]
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 WSGI_APPLICATION = 'christmax.wsgi.application'
@@ -130,4 +146,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Debug toolbar
 INTERNAL_IPS = ['127.0.0.1']
+
+# Django allauth
+ACCOUNT_LOGOUT_REDIRECT_URL ='/accounts/login/'
+LOGIN_REDIRECT_URL = '/accounts/email/'
+
+ACCOUNT_ADAPTER = 'users.custom_allauth.MyAccountAdapter'
 

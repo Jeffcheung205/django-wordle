@@ -85,6 +85,7 @@ django-wordle/
 
 - **Landing Page**: Marketing content, feature highlights, call-to-action
 - **User System**: Registration, login, profile management
+  * To setup SSO via Google/GitHub. Social apps need to be created in social app table
 - **Wordle Game**:
   - 5-letter word guessing (6 attempts)
   - Color-coded feedback (green/yellow/gray)

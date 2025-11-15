@@ -15,27 +15,29 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.contrib import admin
-from django.urls import path, include
-from django.views.i18n import JavaScriptCatalog
+from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
+from django.contrib import admin
+from django.urls import include
+from django.urls import path
+from django.views.i18n import JavaScriptCatalog
+
 from base.views import HomeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Django-allauth URLs (outside i18n_patterns to avoid duplicate registration)
 ]
 
 urlpatterns += i18n_patterns(
     path('jsi18n/', JavaScriptCatalog.as_view(packages=['base']), name='javascript-catalog'),
     path('', HomeView.as_view(), name='home'),
     path('', HomeView.as_view(), name='home_zh'),
+    path('accounts/', include('allauth.urls')),
     prefix_default_language=False,
 )
-
-from django.conf import settings
 
 if settings.DEBUG:
   if "debug_toolbar" in settings.INSTALLED_APPS:
       import debug_toolbar
       urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
-
