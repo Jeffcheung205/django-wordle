@@ -18,6 +18,7 @@ django-coverage-plugin = "3.1.0"  # https://github.com/nedbat/django_coverage_pl
 pytest-django = "4.8.0"  # https://github.com/pytest-dev/pytest-django
 
 whitenoise = "^6.11.0"
+django-allauth = {version = "0.63.4", extras = ["socialaccount"]}
 
 [tool.poetry.group.dev.dependencies]
 
