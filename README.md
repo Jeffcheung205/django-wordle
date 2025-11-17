@@ -230,6 +230,14 @@ LOCALE_PATHS = [BASE_DIR / 'base' / 'locale']
 - **Accessibility**: Semantic HTML, ARIA labels, keyboard navigation
 - **i18n from Day 1**: Built-in bilingual support
 
+## Documentation
+
+Detailed documentation is available in the [`docs/`](docs/) directory:
+
+- **[OAuth Authentication & Account Linking](docs/oauth-authentication.md)** - Comprehensive guide covering Google OAuth integration, account linking behavior, email verification, edge cases, and security considerations.
+
+See the [docs README](docs/README.md) for a complete list of available documentation.
+
 ## Testing
 
 The project includes comprehensive test coverage:
@@ -240,6 +248,10 @@ base/tests/
 ├── test_i18n_settings.py    # i18n configuration tests
 ├── test_i18n_urls.py         # URL pattern tests
 └── test_language_switch.py   # Language switching tests
+users/
+├── test_social_auth.py       # OAuth authentication tests
+├── test_models.py            # User model tests
+└── test_admin_auth.py        # Admin authentication tests
 ```
 
 ### Running Tests
