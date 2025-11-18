@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% block head_title %}{% endblock %}{% endblock %}
+
+{% block content %}
+    {% block body %}
+        {% block inner_content %}
+        {% endblock inner_content %}
+    {% endblock body %}
+    {% block extra_body %}
+    {% endblock extra_body %}
+{% endblock %}

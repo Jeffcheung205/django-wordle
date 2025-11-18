@@ -14,7 +14,40 @@
                 </li>
             </ul>
 
-            <div class="d-flex gap-2 ms-lg-3 mt-3 mt-lg-0">
+            <div class="d-flex gap-2 ms-lg-3 mt-3 mt-lg-0 align-items-center">
+                <!-- Authentication buttons -->
+                {% if user.is_authenticated %}
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light btn-sm dropdown-toggle" 
+                                type="button" 
+                                id="userDropdown"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                            <i class="bi bi-person-circle"></i> {{ user.username }}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="{% url 'account_email' %}">
+                                <i class="bi bi-gear"></i> {% trans "Account Settings" %}
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="{% url 'account_logout' %}">
+                                <i class="bi bi-box-arrow-right"></i> {% trans "Sign Out" %}
+                            </a></li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <a href="{% url 'account_login' %}" class="btn btn-outline-light btn-sm">
+                        <i class="bi bi-box-arrow-in-right"></i> {% trans "Sign In" %}
+                    </a>
+                    {% url 'account_signup' as signup_url %}
+                    {% if signup_url %}
+                        <a href="{{ signup_url }}" class="btn btn-success btn-sm">
+                            <i class="bi bi-person-plus"></i> {% trans "Sign Up" %}
+                        </a>
+                    {% endif %}
+                {% endif %}
+
+                <!-- Theme toggle -->
                 <button
                     class="btn btn-outline-light btn-sm"
                     id="theme-toggle"
@@ -24,6 +57,7 @@
                     <i class="bi bi-sun-fill" id="theme-icon"></i>
                 </button>
 
+                <!-- Language selector -->
                 <label class="visually-hidden" for="language-select">
                     {% trans "Language" %}
                 </label>
