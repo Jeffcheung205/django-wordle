@@ -21,6 +21,7 @@ from django.contrib import admin
 from django.urls import include
 from django.urls import path
 from django.views.i18n import JavaScriptCatalog
+from django.views.generic import TemplateView
 
 from base.views import HomeView
 
@@ -34,6 +35,8 @@ urlpatterns += i18n_patterns(
     path('', HomeView.as_view(), name='home'),
     path('', HomeView.as_view(), name='home_zh'),
     path('accounts/', include('allauth.urls')),
+    # require login or redirect to login page
+    # path('accounts/profile/', TemplateView.as_view(template_name="profile.html"), name='profile'),
     prefix_default_language=False,
 )
 

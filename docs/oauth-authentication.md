@@ -9,6 +9,7 @@ including account linking behavior, email verification, and edge cases.
 
 - [Architecture](#architecture)
 - [Authentication Flows](#authentication-flows)
+- [Password Reset Handling](#password-reset-handling)
 - [Email Verification Behavior](#email-verification-behavior)
 - [Account Linking Logic](#account-linking-logic)
 - [Edge Cases & Security Considerations](#edge-cases--security-considerations)
@@ -132,6 +133,18 @@ Please check your Google account settings."
 ```
 
 ---
+
+## Password Reset Handling
+
+  * Scenario A: resetting a non-existent email: email sent to prompt signup
+  * Scenario B: Just a regular account, worked.
+    * The password reset template and email is not in chinese while at /zh/
+  * Scenario C: Purely OAuth account, worked.
+    * The password reset template and email is not in chinese while at /zh/
+  * Scenario D: Linked OAuth + regular account (same email, linked after regualr account created)
+    * logically, no need to check. Covered in scenario B
+  * Scenario E: Linked OAuth + regular account (diff email, linked after regualr account created)
+    * the reset password only looks at the regular account email, not SocialAccount email
 
 ## Email Verification Behavior
 
