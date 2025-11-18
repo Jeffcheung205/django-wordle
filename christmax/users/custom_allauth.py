@@ -5,7 +5,9 @@ from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 
 logger = logging.getLogger(__name__)
 from django.contrib.auth import get_user_model
+
 User = get_user_model()
+
 
 def generate_username_from_email(user):
     from allauth.account.utils import user_username, user_email
@@ -26,19 +28,27 @@ def generate_username_from_email(user):
 
             user_username(user, username)
 
+
 class MyAccountAdapter(DefaultAccountAdapter):
     """Adapter for regular username/password authentication."""
 
     def get_login_redirect_url(self, request):
         """Override redirect after regular login."""
+        if request.path.startswith('/zh/'):
+            return '/zh/accounts/email/'
         return '/accounts/email/'
+
+    def get_logout_redirect_url(self, request):
+        """Override redirect after logout to preserve language."""
+        if request.path.startswith('/zh/'):
+            return '/zh/'
+        return '/'
 
     def populate_username(self, request, user):
         generate_username_from_email(user)
 
 
 class MySocialAccountAdapter(DefaultSocialAccountAdapter):
-
     def pre_social_login(self, request, sociallogin):
         """
         Link social account to existing user with same email.
@@ -66,7 +76,7 @@ class MySocialAccountAdapter(DefaultSocialAccountAdapter):
             messages.error(
                 request,
                 f'Your {provider.title()} account must provide an email address to sign up. '
-                f'Please check your {provider.title()} account settings.'
+                f'Please check your {provider.title()} account settings.',
             )
             raise ImmediateHttpResponse(redirect('/accounts/login/'))
 
@@ -106,8 +116,16 @@ class MySocialAccountAdapter(DefaultSocialAccountAdapter):
         return user
 
     def get_login_redirect_url(self, request):
-        # social_accounts = request.user.socialaccount_set.all()
+        """Override redirect after social login."""
+        if request.path.startswith('/zh/'):
+            return '/zh/accounts/email/'
         return '/accounts/email/'
+
+    def get_logout_redirect_url(self, request):
+        """Override redirect after logout to preserve language."""
+        if request.path.startswith('/zh/'):
+            return '/zh/'
+        return '/'
 
     def is_auto_signup_allowed(self, request, sociallogin):
         """
