@@ -24,6 +24,7 @@ from django.views.i18n import JavaScriptCatalog
 from django.views.generic import TemplateView
 
 from base.views import HomeView
+from users.views import SettingsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,6 +35,7 @@ urlpatterns += i18n_patterns(
     path('jsi18n/', JavaScriptCatalog.as_view(packages=['base']), name='javascript-catalog'),
     path('', HomeView.as_view(), name='home'),
     path('', HomeView.as_view(), name='home_zh'),
+    path('settings/', SettingsView.as_view(), name='settings'),
     path('accounts/', include('allauth.urls')),
     # require login or redirect to login page
     # path('accounts/profile/', TemplateView.as_view(template_name="profile.html"), name='profile'),

@@ -18,16 +18,16 @@
                 <!-- Authentication buttons -->
                 {% if user.is_authenticated %}
                     <div class="dropdown">
-                        <button class="btn btn-outline-light btn-sm dropdown-toggle" 
-                                type="button" 
+                        <button class="btn btn-outline-light btn-sm dropdown-toggle"
+                                type="button"
                                 id="userDropdown"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false">
                             <i class="bi bi-person-circle"></i> {{ user.username }}
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="{% url 'account_email' %}">
-                                <i class="bi bi-gear"></i> {% trans "Account Settings" %}
+                            <li><a class="dropdown-item" href="{% url 'settings' %}">
+                                <i class="bi bi-gear"></i> {% trans "Settings" %}
                             </a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-danger" href="{% url 'account_logout' %}">
@@ -77,10 +77,27 @@
 
 <script>
 function switchLanguage(lang) {
+    const currentPath = window.location.pathname;
+    let newPath;
+
     if (lang === 'zh') {
-        window.location.href = '/zh/';
+        if (currentPath.startsWith('/zh/')) {
+            newPath = currentPath;
+        } else {
+            newPath = '/zh' + currentPath;
+        }
     } else {
-        window.location.href = '/';
+        if (currentPath.startsWith('/zh/')) {
+            newPath = currentPath.substring(3);
+            if (newPath === '') {
+                newPath = '/';
+            }
+        } else {
+            newPath = currentPath;
+        }
     }
+
+    // Preserve query string and hash if present
+    window.location.href = newPath + window.location.search + window.location.hash;
 }
 </script>

@@ -1,0 +1,109 @@
+{% extends "allauth/layouts/settings.html" %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Account Settings" %}{% endblock %}
+{% block nav_class_overview %}{{ block.super }} active{% endblock %}
+
+{% block inner_content %}
+<h2 class="mb-4">{% trans "Account Settings" %}</h2>
+
+<div class="row g-4">
+
+    <!-- Account Info Card -->
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="bi bi-person"></i> {% trans "Account Information" %}
+                </h5>
+                <p class="card-text text-muted">
+                    <strong>{% trans "Username:" %}</strong> {{ user.username }}<br>
+                    <strong>{% trans "Member since:" %}</strong> {{ user.date_joined|date:"SHORT_DATE_FORMAT" }}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Email Status Card -->
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="bi bi-envelope"></i> {% trans "Email Address" %}
+                </h5>
+                <p class="card-text text-muted">{{ user.email }}</p>
+                {% if email_verified %}
+                    <span class="badge bg-success">
+                        <i class="bi bi-check-circle"></i> {% trans "Verified" %}
+                    </span>
+                {% else %}
+                    <span class="badge bg-warning text-dark">
+                        <i class="bi bi-exclamation-circle"></i> {% trans "Not Verified" %}
+                    </span>
+                {% endif %}
+                <div class="mt-3">
+                    <a href="{% url 'account_email' %}" class="btn btn-sm btn-outline-primary">
+                        <i class="bi bi-gear"></i> {% trans "Manage Email" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Card -->
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="bi bi-key"></i> {% trans "Password" %}
+                </h5>
+                <p class="card-text text-muted">
+                    {% if has_password %}
+                        {% trans "Password is set" %}
+                    {% else %}
+                        {% trans "No password set (using social login)" %}
+                    {% endif %}
+                </p>
+                <div class="mt-3">
+                    {% if has_password %}
+                        <a href="{% url 'account_change_password' %}" class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-pencil"></i> {% trans "Change Password" %}
+                        </a>
+                    {% else %}
+                        <a href="{% url 'account_set_password' %}" class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-plus-circle"></i> {% trans "Set Password" %}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Accounts Card -->
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="bi bi-google"></i> {% trans "Connected Accounts" %}
+                </h5>
+                <p class="card-text text-muted">
+                    {% if social_accounts %}
+                        {% blocktrans count counter=social_accounts.count %}
+                            {{ counter }} account connected
+                        {% plural %}
+                            {{ counter }} accounts connected
+                        {% endblocktrans %}
+                    {% else %}
+                        {% trans "No accounts connected" %}
+                    {% endif %}
+                </p>
+                <div class="mt-3">
+                    <a href="{% url 'socialaccount_connections' %}" class="btn btn-sm btn-outline-primary">
+                        <i class="bi bi-link-45deg"></i> {% trans "Manage Connections" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

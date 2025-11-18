@@ -35,8 +35,8 @@ class MyAccountAdapter(DefaultAccountAdapter):
     def get_login_redirect_url(self, request):
         """Override redirect after regular login."""
         if request.path.startswith('/zh/'):
-            return '/zh/accounts/email/'
-        return '/accounts/email/'
+            return '/zh/settings/'
+        return '/settings/'
 
     def get_logout_redirect_url(self, request):
         """Override redirect after logout to preserve language."""
@@ -118,8 +118,8 @@ class MySocialAccountAdapter(DefaultSocialAccountAdapter):
     def get_login_redirect_url(self, request):
         """Override redirect after social login."""
         if request.path.startswith('/zh/'):
-            return '/zh/accounts/email/'
-        return '/accounts/email/'
+            return '/zh/settings/'
+        return '/settings/'
 
     def get_logout_redirect_url(self, request):
         """Override redirect after logout to preserve language."""

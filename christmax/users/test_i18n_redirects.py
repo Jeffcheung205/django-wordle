@@ -132,22 +132,22 @@ class TestAccountAdapterLoginRedirect:
     def test_english_login_redirects_to_english_email_page(self, account_adapter, english_request):
         """English users should be redirected to /accounts/email/ after login."""
         redirect_url = account_adapter.get_login_redirect_url(english_request)
-        assert redirect_url == '/accounts/email/'
+        assert redirect_url == '/settings/'
 
     def test_chinese_login_redirects_to_chinese_email_page(self, account_adapter, chinese_request):
         """Chinese users should be redirected to /zh/accounts/email/ after login."""
         redirect_url = account_adapter.get_login_redirect_url(chinese_request)
-        assert redirect_url == '/zh/accounts/email/'
+        assert redirect_url == '/zh/settings/'
 
     def test_signup_path_also_preserves_language(self, account_adapter):
         """Language should be preserved from signup page as well."""
         # English signup
         en_request = RequestFactory().get('/accounts/signup/')
-        assert account_adapter.get_login_redirect_url(en_request) == '/accounts/email/'
+        assert account_adapter.get_login_redirect_url(en_request) == '/settings/'
 
         # Chinese signup
         zh_request = RequestFactory().get('/zh/accounts/signup/')
-        assert account_adapter.get_login_redirect_url(zh_request) == '/zh/accounts/email/'
+        assert account_adapter.get_login_redirect_url(zh_request) == '/zh/settings/'
 
 
 @pytest.mark.django_db
@@ -171,11 +171,11 @@ class TestAccountAdapterLogoutRedirect:
     def test_logout_from_account_settings_preserves_language(self, account_adapter):
         """Language should be preserved when logging out from account settings."""
         # English account settings
-        en_request = RequestFactory().post('/accounts/email/')
+        en_request = RequestFactory().post('/settings/')
         assert account_adapter.get_logout_redirect_url(en_request) == '/'
 
         # Chinese account settings
-        zh_request = RequestFactory().post('/zh/accounts/email/')
+        zh_request = RequestFactory().post('/zh/settings/')
         assert account_adapter.get_logout_redirect_url(zh_request) == '/zh/'
 
 
@@ -193,24 +193,24 @@ class TestSocialAccountAdapterLoginRedirect:
     ):
         """English users using Google OAuth should be redirected to /accounts/email/."""
         redirect_url = social_adapter.get_login_redirect_url(english_request)
-        assert redirect_url == '/accounts/email/'
+        assert redirect_url == '/settings/'
 
     def test_chinese_social_login_redirects_to_chinese_email_page(
         self, social_adapter, chinese_request
     ):
         """Chinese users using Google OAuth should be redirected to /zh/accounts/email/."""
         redirect_url = social_adapter.get_login_redirect_url(chinese_request)
-        assert redirect_url == '/zh/accounts/email/'
+        assert redirect_url == '/zh/settings/'
 
     def test_google_callback_path_preserves_language(self, social_adapter):
         """Language should be preserved from OAuth callback URL."""
         # English callback
         en_request = RequestFactory().get('/accounts/google/login/callback/')
-        assert social_adapter.get_login_redirect_url(en_request) == '/accounts/email/'
+        assert social_adapter.get_login_redirect_url(en_request) == '/settings/'
 
         # Chinese callback
         zh_request = RequestFactory().get('/zh/accounts/google/login/callback/')
-        assert social_adapter.get_login_redirect_url(zh_request) == '/zh/accounts/email/'
+        assert social_adapter.get_login_redirect_url(zh_request) == '/zh/settings/'
 
 
 @pytest.mark.django_db
@@ -258,7 +258,7 @@ class TestEdgeCases:
         login_redirect = account_adapter.get_login_redirect_url(request)
         logout_redirect = account_adapter.get_logout_redirect_url(request)
 
-        assert login_redirect == '/accounts/email/'
+        assert login_redirect == '/settings/'
         assert logout_redirect == '/'
 
     def test_malformed_zh_prefix_still_works(self, account_adapter):
@@ -268,18 +268,18 @@ class TestEdgeCases:
         login_redirect = account_adapter.get_login_redirect_url(request)
         logout_redirect = account_adapter.get_logout_redirect_url(request)
 
-        assert login_redirect == '/zh/accounts/email/'
+        assert login_redirect == '/zh/settings/'
         assert logout_redirect == '/zh/'
 
     def test_case_sensitivity_of_zh_prefix(self, account_adapter):
         """Language prefix check should be case-sensitive (lowercase only)."""
         # Uppercase should NOT match
         request_upper = RequestFactory().get('/ZH/accounts/login/')
-        assert account_adapter.get_login_redirect_url(request_upper) == '/accounts/email/'
+        assert account_adapter.get_login_redirect_url(request_upper) == '/settings/'
 
         # Lowercase should match
         request_lower = RequestFactory().get('/zh/accounts/login/')
-        assert account_adapter.get_login_redirect_url(request_lower) == '/zh/accounts/email/'
+        assert account_adapter.get_login_redirect_url(request_lower) == '/zh/settings/'
 
     def test_both_adapters_have_consistent_behavior(self, account_adapter, social_adapter):
         """Both adapters should behave identically for the same paths."""

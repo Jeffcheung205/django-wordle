@@ -1,0 +1,28 @@
+{% extends "allauth/layouts/base.html" %}
+{% load i18n %}
+{% block body %}
+    <div class="flex-grow-1 d-flex flex-row">
+        <aside class="col-md-2 text-bg-dark">
+            <ul class="p-3 nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a class="{% block nav_class_overview %}nav-link text-white{% endblock %}"
+                       href="{% url 'settings' %}">{% trans "Overview" %}</a>
+                </li>
+                {% comment %}
+                {% url 'account_email' as email_url %}
+                {% if email_url %}
+                    <li class="nav-item">
+                        <a class="{% block nav_class_email %}nav-link text-white{% endblock %}"
+                           href="{% url 'account_email' %}">{% trans "Email" %}</a>
+                    </li>
+                {% endif %}
+                {% endcomment %}
+            </ul>
+        </aside>
+        <main class="col-md-10">
+            <div class="container py-4">
+                {% block inner_content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+{% endblock %}
