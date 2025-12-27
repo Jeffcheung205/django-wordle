@@ -4,6 +4,10 @@ This directory contains detailed documentation for various aspects of the Django
 
 ## Available Documents
 
+### Architecture & Design
+
+- **[UML Diagrams](../UML/README.md)** - System architecture diagrams including use case, class, and sequence diagrams.
+
 ### Authentication & Authorization
 
 - **[OAuth Authentication & Account Linking](oauth-authentication.md)** - Comprehensive guide to how Google OAuth works, account linking behavior, email verification, edge cases, and security considerations.

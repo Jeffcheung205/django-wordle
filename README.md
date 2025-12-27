@@ -73,6 +73,10 @@ django-wordle/
 │   │   ├── tests/             # i18n tests
 │   │   └── views.py           # Base views
 │   └── manage.py              # Django CLI
+├── UML/                       # UML diagrams and documentation
+│   ├── README.md              # UML directory documentation
+│   └── use-case-diagram.jpg   # Use case diagram (pending)
+├── docs/                      # Project documentation
 ├── pyproject.toml             # Poetry dependencies
 ├── .gitignore                 # Git ignore rules
 └── README.md                  # This file
@@ -251,6 +255,14 @@ Detailed documentation is available in the [`docs/`](docs/) directory:
 - **[OAuth Authentication & Account Linking](docs/oauth-authentication.md)** - Comprehensive guide covering Google OAuth integration, account linking behavior, email verification, edge cases, and security considerations.
 
 See the [docs README](docs/README.md) for a complete list of available documentation.
+
+### UML Diagrams
+
+System architecture and design diagrams are available in the [`UML/`](UML/) directory:
+
+- **Use Case Diagram** - Visual representation of user interactions and system functionality (pending upload)
+
+See the [UML README](UML/README.md) for diagram details and instructions.
 
 ## Testing
 
