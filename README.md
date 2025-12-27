@@ -1,5 +1,7 @@
 # 天天好學 (FirstToBuzz) - Django Wordle & Quiz Platform
 
+> 📊 **NEW:** [Comprehensive Project Analysis Available](ANALYSIS_SUMMARY.md) - See detailed technical analysis, code quality report, and recommendations.
+
 An educational gaming platform featuring Wordle-style word puzzles and technical knowledge quizzes
 focused on Python, Django, HTML, CSS, and JavaScript. Built with Django 5.2 and designed for
 progressive enhancement across three development phases.
@@ -246,9 +248,20 @@ LOCALE_PATHS = [BASE_DIR / 'base' / 'locale']
 
 ## Documentation
 
+### Project Analysis (NEW)
+
+Comprehensive analysis of the project's current state:
+
+- **[Analysis Summary](ANALYSIS_SUMMARY.md)** - Executive summary with key findings and action items
+- **[Project Analysis](PROJECT_ANALYSIS.md)** - Complete technical architecture and feature review (500+ lines)
+- **[Code Quality Report](CODE_QUALITY_REPORT.md)** - Test results, linting analysis, and security audit
+
+### Technical Documentation
+
 Detailed documentation is available in the [`docs/`](docs/) directory:
 
 - **[OAuth Authentication & Account Linking](docs/oauth-authentication.md)** - Comprehensive guide covering Google OAuth integration, account linking behavior, email verification, edge cases, and security considerations.
+- **[Translation System](docs/translation-system.md)** - Modular translation architecture and workflow
 
 See the [docs README](docs/README.md) for a complete list of available documentation.
 
