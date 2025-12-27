@@ -7,10 +7,7 @@ This directory contains UML diagrams for the Django Wordle project, including us
 ```
 UML/
 ├── README.md                    # This file
-├── use-case-diagram.jpg         # Use case diagram (to be uploaded)
-├── class-diagrams/              # Class diagrams (future)
-├── sequence-diagrams/           # Sequence diagrams (future)
-└── activity-diagrams/           # Activity diagrams (future)
+├── use-case-diagram.jpg         # Use case diagram 
 ```
 
 ## Current Diagrams
