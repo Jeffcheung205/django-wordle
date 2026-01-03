@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',  # Required for django-allauth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -35,6 +36,9 @@ INSTALLED_APPS = [
     'base',
     'users',
 ]
+
+# Required for django-allauth
+SITE_ID = 1
 
 if DEBUG:
     INSTALLED_APPS += ['debug_toolbar', 'django_extensions']
