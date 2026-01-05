@@ -1,5 +1,6 @@
 .tags
 _plan/
+django-wordle/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
