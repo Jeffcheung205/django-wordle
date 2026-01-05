@@ -304,7 +304,7 @@
         <div><kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> <kbd>↓</kbd> Navigate</div>
         <div><kbd>Space</kbd> <kbd>Enter</kbd> Next slide</div>
         <div><kbd>Home</kbd> <kbd>End</kbd> First/Last slide</div>
-        <div><kbd>1</kbd>-<kbd>8</kbd> Jump to slide</div>
+        <div><kbd>1</kbd>-<kbd>0</kbd> Jump to slide</div>
         <div><kbd>Esc</kbd> Return to start</div>
         <div><kbd>?</kbd> Toggle this help</div>
     </div>
@@ -346,7 +346,7 @@
 </head>
 <body>
     <div class="slide-counter">
-        <span id="currentSlide">1</span> / <span id="totalSlides">8</span>
+        <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
     </div>
 
     <div class="presentation">
@@ -393,7 +393,29 @@
             </ul>
         </div>
 
-        <!-- Slide 3: Tech Stack -->
+        <!-- Slide 3: Use Case Diagram -->
+        <div class="slide">
+            <h2>📊 Use Case Diagram</h2>
+            
+            <div class="highlight">
+                <p style="font-size: 1.1em;">
+                    System interactions and user workflows for the FirstToBuzz platform
+                </p>
+            </div>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <img src="UML/use-case-diagram.jpg" alt="Use Case Diagram" style="max-width: 100%; max-height: 60vh; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);">
+            </div>
+
+            <h3>Key Actors & Use Cases</h3>
+            <ul style="font-size: 1.1em;">
+                <li><strong>Guest User</strong> - View public content, register account</li>
+                <li><strong>Registered User</strong> - Play games, take quizzes, view leaderboards</li>
+                <li><strong>System</strong> - Manage authentication, track scores, maintain rankings</li>
+            </ul>
+        </div>
+
+        <!-- Slide 4: Tech Stack -->
         <div class="slide">
             <h2>⚙️ Technology Stack</h2>
 
@@ -446,7 +468,86 @@
             </ul>
         </div>
 
-        <!-- Slide 4: Key Features -->
+        <!-- Slide 5: Database Schema (ERD) -->
+        <div class="slide">
+            <h2>🗄️ Database Schema (ERD)</h2>
+            
+            <div class="highlight">
+                <p style="font-size: 1.1em;">
+                    Entity Relationship Diagram showing the database structure
+                </p>
+            </div>
+
+            <div class="architecture-diagram" style="font-size: 0.95em;">
+┌─────────────────────────────────┐
+│         User (Django)           │
+├─────────────────────────────────┤
+│ PK  id                          │
+│ U   email (USERNAME_FIELD)      │
+│ U   username (auto-generated)   │
+│     first_name                  │
+│     last_name                   │
+│     password                    │
+│     is_active                   │
+│     is_staff                    │
+│     date_joined                 │
+│     last_login                  │
+└─────────────────────────────────┘
+              │
+              │ 1:1
+              ▼
+┌─────────────────────────────────┐
+│           Profile               │
+├─────────────────────────────────┤
+│ PK  id                          │
+│ FK  user_id                     │
+│     player_level (default=1)    │
+│     display_name                │
+│     experience_points (def=0)   │
+│     created_at                  │
+│     updated_at                  │
+└─────────────────────────────────┘
+              │
+              │ 1:N (Planned)
+              ▼
+┌─────────────────────────────────┐
+│        GameScore (TBD)          │
+├─────────────────────────────────┤
+│ PK  id                          │
+│ FK  profile_id                  │
+│     game_type                   │
+│     score                       │
+│     completed_at                │
+└─────────────────────────────────┘
+
+┌─────────────────────────────────┐
+│      SocialAccount              │
+│      (django-allauth)           │
+├─────────────────────────────────┤
+│ PK  id                          │
+│ FK  user_id                     │
+│     provider (Google, etc.)     │
+│     uid                         │
+│     extra_data                  │
+└─────────────────────────────────┘
+            </div>
+
+            <h3>Key Relationships</h3>
+            <ul>
+                <li><strong>User ↔ Profile</strong> - One-to-One (auto-created via signals)</li>
+                <li><strong>User ↔ SocialAccount</strong> - One-to-Many (OAuth providers)</li>
+                <li><strong>Profile ↔ GameScore</strong> - One-to-Many (planned for Phase I)</li>
+            </ul>
+
+            <h3>Design Principles</h3>
+            <ul>
+                <li>Email-based authentication (not username)</li>
+                <li>Separation of auth data (User) from game data (Profile)</li>
+                <li>Extensible for future game types and features</li>
+            </ul>
+        </div>
+
+        <!-- Slide 6: Key Features -->
         <div class="slide">
             <h2>✨ Key Features</h2>
 
@@ -508,7 +609,7 @@
             </div>
         </div>
 
-        <!-- Slide 5: Architecture -->
+        <!-- Slide 7: Architecture -->
         <div class="slide">
             <h2>🏗️ Project Architecture</h2>
 
@@ -549,7 +650,7 @@ django-wordle/
             </ul>
         </div>
 
-        <!-- Slide 6: Development Status -->
+        <!-- Slide 8: Development Status -->
         <div class="slide">
             <h2>📊 Development Status</h2>
 
@@ -587,7 +688,7 @@ django-wordle/
             </div>
         </div>
 
-        <!-- Slide 7: Technical Highlights -->
+        <!-- Slide 9: Technical Highlights -->
         <div class="slide">
             <h2>💡 Technical Highlights</h2>
 
@@ -632,7 +733,7 @@ django-wordle/
             </ul>
         </div>
 
-        <!-- Slide 8: Future Roadmap -->
+        <!-- Slide 10: Future Roadmap -->
         <div class="slide">
             <h2>🚀 Future Roadmap</h2>
 
@@ -754,11 +855,18 @@ django-wordle/
                     break;
             }
 
-            // Number keys 1-8 to jump to specific slides
-            if (event.key >= '1' && event.key <= '8') {
+            // Number keys 1-9 and 0 for slide 10
+            if (event.key >= '1' && event.key <= '9') {
                 const slideNum = parseInt(event.key) - 1;
                 if (slideNum < totalSlides) {
                     showSlide(slideNum);
+                }
+            }
+            
+            // Key '0' for slide 10
+            if (event.key === '0') {
+                if (totalSlides >= 10) {
+                    showSlide(9);
                 }
             }
         });
