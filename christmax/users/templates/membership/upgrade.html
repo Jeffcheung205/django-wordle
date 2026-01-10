@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Upgrade to Premium" %}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-5">
+                <h1 class="display-4 mb-3">
+                    <i class="bi bi-star-fill text-warning"></i>
+                    {% trans "Upgrade to Premium" %}
+                </h1>
+                <p class="lead text-muted">
+                    {% trans "Unlock all features and take your learning to the next level" %}
+                </p>
+            </div>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            {% if premium_plan %}
+                <div class="card shadow-lg border-primary mb-4">
+                    <div class="card-header bg-primary text-white text-center py-4">
+                        <h2 class="mb-0">{{ premium_plan.name }}</h2>
+                    </div>
+                    <div class="card-body p-5">
+                        <div class="text-center mb-4">
+                            <div class="display-3 fw-bold text-primary">HK${{ premium_plan.price_monthly }}</div>
+                            <div class="text-muted fs-5">/{% trans "month" %}</div>
+                        </div>
+
+                        <h4 class="mb-3">{% trans "What's Included:" %}</h4>
+                        <div class="row g-3 mb-4">
+                            {% if premium_plan.daily_quiz_limit == 0 %}
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-start">
+                                        <i class="bi bi-check-circle-fill text-primary fs-4 me-3"></i>
+                                        <div>
+                                            <strong>{% trans "Unlimited Quiz Attempts" %}</strong>
+                                            <p class="text-muted small mb-0">{% trans "Practice as much as you want" %}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            
+                            {% if premium_plan.access_all_questions %}
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-start">
+                                        <i class="bi bi-check-circle-fill text-primary fs-4 me-3"></i>
+                                        <div>
+                                            <strong>{% trans "All 100+ Questions" %}</strong>
+                                            <p class="text-muted small mb-0">{% trans "Full question bank access" %}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            
+                            {% if premium_plan.can_enter_competitions %}
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-start">
+                                        <i class="bi bi-check-circle-fill text-primary fs-4 me-3"></i>
+                                        <div>
+                                            <strong>{% trans "Enter Competitions" %}</strong>
+                                            <p class="text-muted small mb-0">{% trans "Compete and win prizes" %}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            
+                            {% if premium_plan.has_progress_tracking %}
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-start">
+                                        <i class="bi bi-check-circle-fill text-primary fs-4 me-3"></i>
+                                        <div>
+                                            <strong>{% trans "Progress Tracking" %}</strong>
+                                            <p class="text-muted small mb-0">{% trans "Monitor your improvement" %}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            
+                            {% if premium_plan.has_detailed_analytics %}
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-start">
+                                        <i class="bi bi-check-circle-fill text-primary fs-4 me-3"></i>
+                                        <div>
+                                            <strong>{% trans "Detailed Analytics" %}</strong>
+                                            <p class="text-muted small mb-0">{% trans "In-depth performance insights" %}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            
+                            {% if premium_plan.has_certificates %}
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-start">
+                                        <i class="bi bi-check-circle-fill text-primary fs-4 me-3"></i>
+                                        <div>
+                                            <strong>{% trans "Certificates" %}</strong>
+                                            <p class="text-muted small mb-0">{% trans "Earn completion certificates" %}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            
+                            {% if premium_plan.is_ad_free %}
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-start">
+                                        <i class="bi bi-check-circle-fill text-primary fs-4 me-3"></i>
+                                        <div>
+                                            <strong>{% trans "Ad-Free Experience" %}</strong>
+                                            <p class="text-muted small mb-0">{% trans "No interruptions" %}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="d-grid gap-2 mb-4">
+                            <a href="{% url 'membership:checkout' %}?plan_id={{ premium_plan.id }}" 
+                               class="btn btn-primary btn-lg py-3">
+                                <i class="bi bi-arrow-up-circle me-2"></i>
+                                {% trans "Upgrade Now" %}
+                            </a>
+                        </div>
+
+                        <div class="text-center">
+                            <small class="text-muted">
+                                <i class="bi bi-shield-check me-1"></i>
+                                {% trans "7-day money-back guarantee • Cancel anytime" %}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <a href="{% url 'membership:plans' %}" class="btn btn-outline-secondary">
+                        {% trans "View All Plans" %}
+                    </a>
+                </div>
+            {% else %}
+                <div class="alert alert-danger">
+                    {% trans "Premium plan is not available at this time. Please try again later." %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

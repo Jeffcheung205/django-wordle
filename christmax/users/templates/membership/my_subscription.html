@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "My Subscription" %}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">{% trans "My Subscription" %}</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if current_subscription %}
+        <div class="row g-4 mb-5">
+            <div class="col-lg-8">
+                <div class="card shadow">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-4">
+                            <div>
+                                <h3 class="card-title mb-2">{{ current_subscription.plan.name }}</h3>
+                                <span class="badge bg-{% if current_subscription.status == 'ACTIVE' %}success{% elif current_subscription.status == 'EXPIRED' %}danger{% else %}secondary{% endif %} fs-6">
+                                    {{ current_subscription.get_status_display }}
+                                </span>
+                            </div>
+                            <div class="text-end">
+                                {% if current_subscription.plan.price_monthly == 0 %}
+                                    <div class="display-6 text-success">{% trans "Free" %}</div>
+                                {% else %}
+                                    <div class="display-6">HK${{ current_subscription.plan.price_monthly }}</div>
+                                    <small class="text-muted">/{% trans "month" %}</small>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3">
+                                <small class="text-muted">{% trans "Start Date" %}</small>
+                                <div class="fw-bold">{{ current_subscription.start_date|date:"F d, Y" }}</div>
+                            </div>
+                            {% if current_subscription.end_date %}
+                                <div class="col-md-6 mb-3">
+                                    <small class="text-muted">{% trans "End Date" %}</small>
+                                    <div class="fw-bold">{{ current_subscription.end_date|date:"F d, Y" }}</div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <small class="text-muted">{% trans "Days Remaining" %}</small>
+                                    <div class="fw-bold">
+                                        {% with days=current_subscription.days_remaining %}
+                                            {% if days == 0 %}
+                                                <span class="text-danger">{% trans "Expired" %}</span>
+                                            {% elif days <= 7 %}
+                                                <span class="text-warning">{{ days }} {% trans "days" %}</span>
+                                            {% else %}
+                                                <span class="text-success">{{ days }} {% trans "days" %}</span>
+                                            {% endif %}
+                                        {% endwith %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if current_subscription.payment_method %}
+                                <div class="col-md-6 mb-3">
+                                    <small class="text-muted">{% trans "Payment Method" %}</small>
+                                    <div class="fw-bold text-capitalize">{{ current_subscription.payment_method }}</div>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="d-flex gap-2 flex-wrap">
+                            {% if not current_subscription.plan.is_free %}
+                                {% if current_subscription.status == 'ACTIVE' %}
+                                    <form method="post" action="{% url 'membership:cancel_subscription' %}" 
+                                          onsubmit="return confirm('{% trans "Are you sure you want to cancel your subscription?" %}');">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-outline-danger">
+                                            <i class="bi bi-x-circle me-2"></i>{% trans "Cancel Subscription" %}
+                                        </button>
+                                    </form>
+                                {% elif current_subscription.status == 'EXPIRED' %}
+                                    <form method="post" action="{% url 'membership:renew_subscription' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="subscription_id" value="{{ current_subscription.id }}">
+                                        <input type="hidden" name="months" value="1">
+                                        <button type="submit" class="btn btn-success">
+                                            <i class="bi bi-arrow-repeat me-2"></i>{% trans "Renew Subscription" %}
+                                        </button>
+                                    </form>
+                                {% endif %}
+                            {% endif %}
+                            
+                            {% if current_subscription.plan.is_free %}
+                                <a href="{% url 'membership:upgrade_to_premium' %}" class="btn btn-primary">
+                                    <i class="bi bi-arrow-up-circle me-2"></i>{% trans "Upgrade to Premium" %}
+                                </a>
+                            {% endif %}
+                            
+                            <a href="{% url 'membership:plans' %}" class="btn btn-outline-primary">
+                                <i class="bi bi-eye me-2"></i>{% trans "View All Plans" %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">
+                            <i class="bi bi-star-fill text-warning me-2"></i>{% trans "Your Features" %}
+                        </h5>
+                        <ul class="list-unstyled mb-0">
+                            {% if current_subscription.plan.daily_quiz_limit == 0 %}
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>{% trans "Unlimited quizzes" %}</li>
+                            {% else %}
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>{{ current_subscription.plan.daily_quiz_limit }} {% trans "quizzes/day" %}</li>
+                            {% endif %}
+                            
+                            {% if current_subscription.plan.access_all_questions %}
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>{% trans "All questions" %}</li>
+                            {% endif %}
+                            
+                            {% if current_subscription.plan.can_enter_competitions %}
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>{% trans "Competitions" %}</li>
+                            {% endif %}
+                            
+                            {% if current_subscription.plan.has_progress_tracking %}
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>{% trans "Progress tracking" %}</li>
+                            {% endif %}
+                            
+                            {% if current_subscription.plan.has_detailed_analytics %}
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>{% trans "Detailed analytics" %}</li>
+                            {% endif %}
+                            
+                            {% if current_subscription.plan.has_certificates %}
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>{% trans "Certificates" %}</li>
+                            {% endif %}
+                            
+                            {% if current_subscription.plan.is_ad_free %}
+                                <li class="mb-2"><i class="bi bi-check-lg text-success me-2"></i>{% trans "Ad-free" %}</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if subscription_history %}
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">{% trans "Subscription History" %}</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
+                                <tr>
+                                    <th>{% trans "Plan" %}</th>
+                                    <th>{% trans "Status" %}</th>
+                                    <th>{% trans "Start Date" %}</th>
+                                    <th>{% trans "End Date" %}</th>
+                                    <th>{% trans "Payment" %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for subscription in subscription_history %}
+                                    <tr>
+                                        <td>{{ subscription.plan.name }}</td>
+                                        <td>
+                                            <span class="badge bg-{% if subscription.status == 'ACTIVE' %}success{% elif subscription.status == 'EXPIRED' %}secondary{% else %}danger{% endif %}">
+                                                {{ subscription.get_status_display }}
+                                            </span>
+                                        </td>
+                                        <td>{{ subscription.start_date|date:"Y-m-d" }}</td>
+                                        <td>
+                                            {% if subscription.end_date %}
+                                                {{ subscription.end_date|date:"Y-m-d" }}
+                                            {% else %}
+                                                <span class="text-muted">∞</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-capitalize">{{ subscription.payment_method|default:"—" }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+    {% else %}
+        <div class="alert alert-warning">
+            <h5 class="alert-heading">{% trans "No Active Subscription" %}</h5>
+            <p class="mb-0">
+                {% trans "You don't have an active subscription. Please choose a plan to get started." %}
+            </p>
+            <hr>
+            <a href="{% url 'membership:plans' %}" class="btn btn-primary">
+                {% trans "View Plans" %}
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+

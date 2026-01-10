@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Membership Plans" %}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 mb-3">{% trans "Choose Your Plan" %}</h1>
+        <p class="lead text-muted">{% trans "Select the plan that's right for you" %}</p>
+    </div>
+
+    {% if messages %}
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-8">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row g-4 justify-content-center">
+        {% for plan in plans %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 {% if plan.tier == 'PREMIUM' %}border-primary shadow{% else %}shadow-sm{% endif %}">
+                    {% if plan.tier == 'PREMIUM' %}
+                        <div class="card-header bg-primary text-white text-center py-3">
+                            <span class="badge bg-warning text-dark">{% trans "MOST POPULAR" %}</span>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="card-body p-4">
+                        <h3 class="card-title mb-3">{{ plan.name }}</h3>
+                        
+                        <div class="mb-3">
+                            {% if plan.price_monthly == 0 %}
+                                <span class="display-4 text-success">{% trans "Free" %}</span>
+                            {% else %}
+                                <span class="display-4">HK${{ plan.price_monthly }}</span>
+                                <span class="text-muted">/{% trans "month" %}</span>
+                            {% endif %}
+                        </div>
+                        
+                        {% if plan.description %}
+                            <p class="text-muted mb-4">{{ plan.description }}</p>
+                        {% endif %}
+                        
+                        <ul class="list-unstyled mb-4">
+                            {% if plan.daily_quiz_limit == 0 %}
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                    <strong>{% trans "Unlimited quiz attempts" %}</strong>
+                                </li>
+                            {% else %}
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    {{ plan.daily_quiz_limit }} {% trans "quiz attempts per day" %}
+                                </li>
+                            {% endif %}
+                            
+                            {% if plan.access_all_questions %}
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                    <strong>{% trans "All 100+ questions" %}</strong>
+                                </li>
+                            {% else %}
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                    {% trans "Basic categories access" %}
+                                </li>
+                            {% endif %}
+                            
+                            {% if plan.can_enter_competitions %}
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                    <strong>{% trans "Enter competitions" %}</strong>
+                                </li>
+                            {% else %}
+                                <li class="mb-2 text-muted">
+                                    <i class="bi bi-x-circle-fill me-2"></i>
+                                    {% trans "No competition entry" %}
+                                </li>
+                            {% endif %}
+                            
+                            {% if plan.has_progress_tracking %}
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                    {% trans "Progress tracking" %}
+                                </li>
+                            {% else %}
+                                <li class="mb-2 text-muted">
+                                    <i class="bi bi-x-circle-fill me-2"></i>
+                                    {% trans "No progress tracking" %}
+                                </li>
+                            {% endif %}
+                            
+                            {% if plan.has_detailed_analytics %}
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                    {% trans "Detailed analytics" %}
+                                </li>
+                            {% endif %}
+                            
+                            {% if plan.has_certificates %}
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                    {% trans "Certificate of completion" %}
+                                </li>
+                            {% endif %}
+                            
+                            {% if plan.is_ad_free %}
+                                <li class="mb-2">
+                                    <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                    {% trans "Ad-free experience" %}
+                                </li>
+                            {% endif %}
+                        </ul>
+                        
+                        {% if user.is_authenticated and current_subscription and current_subscription.plan.id == plan.id %}
+                            <button class="btn btn-outline-secondary w-100" disabled>
+                                {% trans "Current Plan" %}
+                            </button>
+                        {% elif plan.tier == 'FREE' %}
+                            <a href="{% url 'account_signup' %}" class="btn btn-outline-primary w-100">
+                                {% trans "Get Started" %}
+                            </a>
+                        {% else %}
+                            <a href="{% url 'membership:checkout' %}?plan_id={{ plan.id }}" 
+                               class="btn btn-primary w-100 btn-lg">
+                                {% trans "Upgrade Now" %}
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <div class="row mt-5">
+        <div class="col-lg-8 mx-auto">
+            <div class="alert alert-info border-0" role="alert">
+                <div class="text-center">
+                    <i class="bi bi-shield-check fs-3 me-2"></i>
+                    <strong>{% trans "7-day money-back guarantee" %}</strong> • 
+                    {% trans "Cancel anytime" %} • 
+                    {% trans "No hidden fees" %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

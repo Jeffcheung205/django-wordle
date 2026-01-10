@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Checkout" %}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h1 class="mb-4">{% trans "Checkout" %}</h1>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            {% if selected_plan %}
+                <div class="row g-4">
+                    <div class="col-lg-8">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header">
+                                <h5 class="mb-0">{% trans "Payment Method" %}</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-info">
+                                    <i class="bi bi-info-circle me-2"></i>
+                                    <strong>{% trans "Payment Integration Coming Soon" %}</strong>
+                                    <p class="mb-0 mt-2">
+                                        {% trans "This is a demo checkout page. In production, integrate with:" %}
+                                    </p>
+                                    <ul class="mt-2 mb-0">
+                                        <li>Stripe for credit card payments</li>
+                                        <li>PayPal for alternative payment</li>
+                                        <li>Alipay/WeChat Pay for Asian markets</li>
+                                    </ul>
+                                </div>
+
+                                <form method="post" action="{% url 'membership:process_upgrade' %}" id="payment-form">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="plan_id" value="{{ selected_plan.id }}">
+                                    
+                                    <div class="mb-4">
+                                        <label class="form-label fw-bold">{% trans "Select Payment Method" %}</label>
+                                        
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="radio" name="payment_method" 
+                                                   id="stripe" value="stripe" checked>
+                                            <label class="form-check-label" for="stripe">
+                                                <i class="bi bi-credit-card me-2"></i>
+                                                {% trans "Credit Card (Stripe)" %}
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="radio" name="payment_method" 
+                                                   id="paypal" value="paypal">
+                                            <label class="form-check-label" for="paypal">
+                                                <i class="bi bi-paypal me-2"></i>
+                                                PayPal
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="radio" name="payment_method" 
+                                                   id="manual" value="manual">
+                                            <label class="form-check-label" for="manual">
+                                                <i class="bi bi-bank me-2"></i>
+                                                {% trans "Manual Payment (Demo)" %}
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div id="card-element" class="mb-3">
+                                        <!-- Stripe card element would go here -->
+                                    </div>
+
+                                    <div class="form-check mb-4">
+                                        <input class="form-check-input" type="checkbox" id="terms" required>
+                                        <label class="form-check-label" for="terms">
+                                            {% trans "I agree to the" %} 
+                                            <a href="#">{% trans "Terms of Service" %}</a> {% trans "and" %} 
+                                            <a href="#">{% trans "Privacy Policy" %}</a>
+                                        </label>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary btn-lg w-100" id="submit-button">
+                                        <i class="bi bi-lock-fill me-2"></i>
+                                        {% trans "Complete Purchase" %}
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="text-center text-muted">
+                            <small>
+                                <i class="bi bi-shield-check me-1"></i>
+                                {% trans "Secure checkout • SSL encrypted • PCI compliant" %}
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card shadow-sm">
+                            <div class="card-header">
+                                <h5 class="mb-0">{% trans "Order Summary" %}</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <strong>{{ selected_plan.name }}</strong>
+                                        <div class="small text-muted">{% trans "Monthly subscription" %}</div>
+                                    </div>
+                                    <div class="text-end">
+                                        <strong>HK${{ selected_plan.price_monthly }}</strong>
+                                    </div>
+                                </div>
+                                
+                                <hr>
+                                
+                                <div class="d-flex justify-content-between mb-3">
+                                    <strong>{% trans "Total" %}</strong>
+                                    <strong class="text-primary fs-5">HK${{ selected_plan.price_monthly }}</strong>
+                                </div>
+                                
+                                <div class="alert alert-success small mb-0">
+                                    <i class="bi bi-check-circle me-1"></i>
+                                    {% trans "Billed monthly • Cancel anytime" %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card shadow-sm mt-3">
+                            <div class="card-body">
+                                <h6 class="card-title">
+                                    <i class="bi bi-shield-check text-success me-2"></i>
+                                    {% trans "Money-Back Guarantee" %}
+                                </h6>
+                                <p class="card-text small text-muted mb-0">
+                                    {% trans "Try Premium risk-free for 7 days. If you're not satisfied, we'll refund your money, no questions asked." %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-warning">
+                    <h5 class="alert-heading">{% trans "No Plan Selected" %}</h5>
+                    <p class="mb-0">
+                        {% trans "Please select a plan to proceed with checkout." %}
+                    </p>
+                    <hr>
+                    <a href="{% url 'membership:plans' %}" class="btn btn-primary">
+                        {% trans "View Plans" %}
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% if selected_plan %}
+<script>
+    // TODO: Add Stripe or PayPal payment integration
+    // Example Stripe setup:
+    // const stripe = Stripe('{{ stripe_public_key }}');
+    // const elements = stripe.elements();
+    // const cardElement = elements.create('card');
+    // cardElement.mount('#card-element');
+</script>
+{% endif %}
+{% endblock %}

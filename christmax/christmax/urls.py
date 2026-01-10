@@ -28,15 +28,16 @@ from users.views import SettingsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('jsi18n/', JavaScriptCatalog.as_view(packages=['base']), name='javascript-catalog'),
     # Django-allauth URLs (outside i18n_patterns to avoid duplicate registration)
 ]
 
 urlpatterns += i18n_patterns(
-    path('jsi18n/', JavaScriptCatalog.as_view(packages=['base']), name='javascript-catalog'),
     path('', HomeView.as_view(), name='home'),
     path('', HomeView.as_view(), name='home_zh'),
     path('settings/', SettingsView.as_view(), name='settings'),
     path('accounts/', include('allauth.urls')),
+    path('membership/', include('users.urls_membership')),
     # require login or redirect to login page
     # path('accounts/profile/', TemplateView.as_view(template_name="profile.html"), name='profile'),
     prefix_default_language=False,

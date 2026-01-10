@@ -15,7 +15,7 @@
                     <a href="#sample-quiz" class="btn btn-light btn-lg px-4">
                         <i class="bi bi-play-circle me-2"></i>{% trans "Try Sample Questions" %}
                     </a>
-                    <a href="#pricing" class="btn btn-outline-light btn-lg px-4">
+                    <a href="{% url 'membership:plans' %}" class="btn btn-outline-light btn-lg px-4">
                         {% trans "View Pricing" %}
                     </a>
                 </div>
@@ -317,7 +317,7 @@
 
                 <div class="text-center">
                     <p class="lead mb-3">{% trans "Want access to 100+ more questions?" %}</p>
-                    <a href="#pricing" class="btn btn-primary btn-lg">{% trans "View Membership Plans" %}</a>
+                    <a href="{% url 'membership:plans' %}" class="btn btn-primary btn-lg">{% trans "View Membership Plans" %}</a>
                 </div>
             </div>
         </div>
@@ -410,7 +410,7 @@
                             <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>{% trans "Certificate of completion" %}</li>
                             <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>{% trans "Ad-free experience" %}</li>
                         </ul>
-                        <button class="btn btn-primary w-100 btn-lg">{% trans "Upgrade Now" %}</button>
+                        <a href="{% url 'membership:plans' %}" class="btn btn-primary w-100 btn-lg">{% trans "Upgrade Now" %}</a>
                     </div>
                 </div>
             </div>
@@ -438,7 +438,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <div class="d-grid gap-3">
-                    <a href="#" class="btn btn-light btn-lg">
+                    <a href="{% url 'account_signup' %}" class="btn btn-light btn-lg">
                         <i class="bi bi-person-plus me-2"></i>{% trans "Register Free Account" %}
                     </a>
                     <p class="mb-0 small">{% trans "No credit card required • Start practicing immediately" %}</p>

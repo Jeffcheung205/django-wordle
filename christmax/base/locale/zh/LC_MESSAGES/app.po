@@ -661,6 +661,405 @@ msgstr "管理連結"
 msgid "Overview"
 msgstr "總覽"
 
+# Membership System Translations
+#: users/templates/membership/plans.html
+msgid "Membership Plans"
+msgstr "會員方案"
+
+msgid "Choose Your Plan"
+msgstr "選擇您的方案"
+
+msgid "Select the plan that's right for you"
+msgstr "選擇適合您的方案"
+
+msgid "MOST POPULAR"
+msgstr "最受歡迎"
+
+msgid "month"
+msgstr "月"
+
+msgid "Get Started"
+msgstr "開始使用"
+
+msgid "Upgrade Now"
+msgstr "立即升級"
+
+msgid "Current Plan"
+msgstr "當前方案"
+
+msgid "7-day money-back guarantee"
+msgstr "7 天退款保證"
+
+msgid "Cancel anytime"
+msgstr "隨時取消"
+
+msgid "No hidden fees"
+msgstr "無隱藏費用"
+
+msgid "quiz attempts per day"
+msgstr "每天測驗次數"
+
+msgid "Basic categories access"
+msgstr "基本分類存取"
+
+msgid "No competition entry"
+msgstr "無法參加競賽"
+
+msgid "No progress tracking"
+msgstr "無進度追蹤"
+
+msgid "Unlimited quiz attempts"
+msgstr "無限測驗機會"
+
+msgid "All 100+ questions"
+msgstr "全部 100+ 題目"
+
+msgid "Enter competitions"
+msgstr "參加競賽"
+
+msgid "Progress tracking"
+msgstr "進度追蹤"
+
+msgid "Detailed analytics"
+msgstr "詳細分析"
+
+msgid "Certificate of completion"
+msgstr "完成證書"
+
+msgid "Ad-free experience"
+msgstr "無廣告體驗"
+
+#: users/templates/membership/my_subscription.html
+msgid "My Subscription"
+msgstr "我的訂閱"
+
+msgid "Start Date"
+msgstr "開始日期"
+
+msgid "End Date"
+msgstr "結束日期"
+
+msgid "Days Remaining"
+msgstr "剩餘天數"
+
+msgid "days"
+msgstr "天"
+
+msgid "Expired"
+msgstr "已過期"
+
+msgid "Payment Method"
+msgstr "付款方式"
+
+msgid "Cancel Subscription"
+msgstr "取消訂閱"
+
+msgid "Are you sure you want to cancel your subscription?"
+msgstr "您確定要取消訂閱嗎？"
+
+msgid "Renew Subscription"
+msgstr "續訂"
+
+msgid "Upgrade to Premium"
+msgstr "升級至高級會員"
+
+msgid "View All Plans"
+msgstr "查看所有方案"
+
+msgid "Your Features"
+msgstr "您的功能"
+
+msgid "quizzes/day"
+msgstr "測驗/天"
+
+msgid "Unlimited quizzes"
+msgstr "無限測驗"
+
+msgid "All questions"
+msgstr "所有題目"
+
+msgid "Competitions"
+msgstr "競賽"
+
+msgid "Certificates"
+msgstr "證書"
+
+msgid "Ad-free"
+msgstr "無廣告"
+
+msgid "Subscription History"
+msgstr "訂閱歷史"
+
+msgid "Plan"
+msgstr "方案"
+
+msgid "Status"
+msgstr "狀態"
+
+msgid "Payment"
+msgstr "付款"
+
+msgid "No Active Subscription"
+msgstr "無有效訂閱"
+
+msgid "You don't have an active subscription. Please choose a plan to get started."
+msgstr "您目前沒有有效的訂閱。請選擇一個方案開始使用。"
+
+msgid "View Plans"
+msgstr "查看方案"
+
+#: users/templates/membership/upgrade.html
+msgid "Unlock all features and take your learning to the next level"
+msgstr "解鎖所有功能，讓您的學習更上一層樓"
+
+msgid "What's Included:"
+msgstr "包含內容："
+
+msgid "Practice as much as you want"
+msgstr "隨心所欲地練習"
+
+msgid "Full question bank access"
+msgstr "完整題庫存取"
+
+msgid "Compete and win prizes"
+msgstr "參加競賽並贏取獎品"
+
+msgid "Monitor your improvement"
+msgstr "監控您的進步"
+
+msgid "In-depth performance insights"
+msgstr "深入的表現分析"
+
+msgid "Earn completion certificates"
+msgstr "獲得完成證書"
+
+msgid "No interruptions"
+msgstr "無干擾"
+
+msgid "Premium plan is not available at this time. Please try again later."
+msgstr "高級方案目前暫不提供。請稍後再試。"
+
+#: users/templates/membership/checkout.html
+msgid "Checkout"
+msgstr "結帳"
+
+msgid "Payment Integration Coming Soon"
+msgstr "付款整合即將推出"
+
+msgid "This is a demo checkout page. In production, integrate with:"
+msgstr "這是示範結帳頁面。在正式環境中，請整合："
+
+msgid "Select Payment Method"
+msgstr "選擇付款方式"
+
+msgid "Credit Card (Stripe)"
+msgstr "信用卡（Stripe）"
+
+msgid "Manual Payment (Demo)"
+msgstr "手動付款（示範）"
+
+msgid "I agree to the"
+msgstr "我同意"
+
+msgid "Terms of Service"
+msgstr "服務條款"
+
+msgid "and"
+msgstr "和"
+
+msgid "Privacy Policy"
+msgstr "隱私政策"
+
+msgid "Complete Purchase"
+msgstr "完成購買"
+
+msgid "Secure checkout • SSL encrypted • PCI compliant"
+msgstr "安全結帳 • SSL 加密 • PCI 合規"
+
+msgid "Order Summary"
+msgstr "訂單摘要"
+
+msgid "Monthly subscription"
+msgstr "月度訂閱"
+
+msgid "Total"
+msgstr "總計"
+
+msgid "Billed monthly • Cancel anytime"
+msgstr "每月計費 • 隨時取消"
+
+msgid "Money-Back Guarantee"
+msgstr "退款保證"
+
+msgid "Try Premium risk-free for 7 days. If you're not satisfied, we'll refund your money, no questions asked."
+msgstr "免費試用高級會員 7 天。如果您不滿意，我們將無條件退款。"
+
+msgid "No Plan Selected"
+msgstr "未選擇方案"
+
+msgid "Please select a plan to proceed with checkout."
+msgstr "請選擇一個方案以繼續結帳。"
+
+# User Model Translations
+msgid "Free"
+msgstr "免費"
+
+msgid "Premium"
+msgstr "高級會員"
+
+msgid "subscription plan"
+msgstr "訂閱方案"
+
+msgid "subscription plans"
+msgstr "訂閱方案"
+
+msgid "user subscription"
+msgstr "用戶訂閱"
+
+msgid "user subscriptions"
+msgstr "用戶訂閱"
+
+msgid "Active"
+msgstr "有效"
+
+msgid "Cancelled"
+msgstr "已取消"
+
+msgid "Trial"
+msgstr "試用"
+
+msgid "plan name"
+msgstr "方案名稱"
+
+msgid "Display name for the plan (e.g., \"Premium\", \"Free\")"
+msgstr "方案的顯示名稱（例如：「高級會員」、「免費」）"
+
+msgid "tier"
+msgstr "級別"
+
+msgid "Membership tier level"
+msgstr "會員級別"
+
+msgid "monthly price"
+msgstr "月費"
+
+msgid "Price in HKD per month"
+msgstr "每月價格（港幣）"
+
+msgid "daily quiz limit"
+msgstr "每日測驗限制"
+
+msgid "Maximum quiz attempts per day (0 = unlimited)"
+msgstr "每天最多測驗次數（0 = 無限制）"
+
+msgid "can enter competitions"
+msgstr "可參加競賽"
+
+msgid "Allow participation in competitions"
+msgstr "允許參加競賽"
+
+msgid "has progress tracking"
+msgstr "有進度追蹤"
+
+msgid "Enable detailed progress analytics"
+msgstr "啟用詳細進度分析"
+
+msgid "has detailed analytics"
+msgstr "有詳細分析"
+
+msgid "Enable detailed performance analytics"
+msgstr "啟用詳細表現分析"
+
+msgid "has certificates"
+msgstr "有證書"
+
+msgid "Enable certificate generation"
+msgstr "啟用證書生成"
+
+msgid "ad-free experience"
+msgstr "無廣告體驗"
+
+msgid "Remove advertisements"
+msgstr "移除廣告"
+
+msgid "access all questions"
+msgstr "存取所有題目"
+
+msgid "Access to all 100+ questions"
+msgstr "存取所有 100+ 題目"
+
+msgid "description"
+msgstr "描述"
+
+msgid "Short description of the plan"
+msgstr "方案的簡短描述"
+
+msgid "is active"
+msgstr "啟用"
+
+msgid "Whether this plan is available for new subscriptions"
+msgstr "此方案是否可供新訂閱"
+
+msgid "created at"
+msgstr "建立時間"
+
+msgid "updated at"
+msgstr "更新時間"
+
+msgid "status"
+msgstr "狀態"
+
+msgid "start date"
+msgstr "開始日期"
+
+msgid "When the subscription started"
+msgstr "訂閱開始時間"
+
+msgid "end date"
+msgstr "結束日期"
+
+msgid "When the subscription expires (null = indefinite)"
+msgstr "訂閱到期時間（空值 = 無限期）"
+
+msgid "payment method"
+msgstr "付款方式"
+
+msgid "transaction ID"
+msgstr "交易編號"
+
+msgid "External payment transaction reference"
+msgstr "外部付款交易參考"
+
+msgid "auto-renew"
+msgstr "自動續訂"
+
+msgid "Automatically renew subscription"
+msgstr "自動續訂"
+
+msgid "cancelled at"
+msgstr "取消時間"
+
+msgid "When the user cancelled the subscription"
+msgstr "用戶取消訂閱的時間"
+
+msgid "notes"
+msgstr "備註"
+
+msgid "Internal notes about this subscription"
+msgstr "關於此訂閱的內部備註"
+
+msgid "Perfect to get started with basic features"
+msgstr "完美入門，具備基本功能"
+
+msgid "For serious learners who want unlimited access"
+msgstr "認真學習者的無限存取"
+
+msgid "For serious learners"
+msgstr "認真學習者適用"
+
+msgid "Perfect to get started"
+msgstr "完美入門"
+
 #~ msgid "Wordle"
 #~ msgstr "單詞猜謎"
 

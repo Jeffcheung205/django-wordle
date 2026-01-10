@@ -1,8 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
+from django.utils.html import format_html
+from django.db.models import Count, Q
+from django.utils import timezone
 
-from .models import Profile, User
+from .models import Profile, User, SubscriptionPlan, UserSubscription
 
 
 class ProfileInline(admin.StackedInline):
@@ -70,3 +73,176 @@ class ProfileAdmin(admin.ModelAdmin):
         if obj:  # Editing existing profile
             return list(self.readonly_fields) + ['user']
         return self.readonly_fields
+
+
+class UserSubscriptionInline(admin.TabularInline):
+    """Inline admin for UserSubscription - shows subscriptions inside User admin."""
+    
+    model = UserSubscription
+    extra = 0
+    fields = ('plan', 'status', 'start_date', 'end_date', 'auto_renew', 'payment_method')
+    readonly_fields = ('start_date',)
+    can_delete = False
+
+
+@admin.register(SubscriptionPlan)
+class SubscriptionPlanAdmin(admin.ModelAdmin):
+    """Admin interface for managing subscription plans."""
+    
+    list_display = (
+        'name', 'tier', 'price_display', 'daily_quiz_limit',
+        'subscriber_count', 'is_active', 'created_at'
+    )
+    list_filter = ('tier', 'is_active', 'can_enter_competitions', 'has_progress_tracking')
+    search_fields = ('name', 'description')
+    readonly_fields = ('created_at', 'updated_at', 'subscriber_count', 'active_subscriber_count')
+    
+    fieldsets = (
+        (_('Basic Information'), {
+            'fields': ('name', 'tier', 'price_monthly', 'description', 'is_active')
+        }),
+        (_('Feature Limits'), {
+            'fields': (
+                'daily_quiz_limit',
+                'access_all_questions',
+                'can_enter_competitions',
+            )
+        }),
+        (_('Premium Features'), {
+            'fields': (
+                'has_progress_tracking',
+                'has_detailed_analytics',
+                'has_certificates',
+                'is_ad_free',
+            )
+        }),
+        (_('Statistics'), {
+            'fields': ('subscriber_count', 'active_subscriber_count'),
+            'classes': ('collapse',)
+        }),
+        (_('Metadata'), {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def price_display(self, obj):
+        """Display price with currency."""
+        if obj.price_monthly == 0:
+            return format_html('<span style="color: green; font-weight: bold;">FREE</span>')
+        return format_html(
+            '<span style="color: #007bff; font-weight: bold;">HK${}</span>',
+            obj.price_monthly
+        )
+    price_display.short_description = _('Price')
+    
+    def subscriber_count(self, obj):
+        """Total number of subscribers (all time)."""
+        return obj.subscriptions.count()
+    subscriber_count.short_description = _('Total Subscribers')
+    
+    def active_subscriber_count(self, obj):
+        """Number of currently active subscribers."""
+        count = obj.subscriptions.filter(status='ACTIVE').count()
+        return format_html(
+            '<span style="color: green; font-weight: bold;">{}</span>',
+            count
+        )
+    active_subscriber_count.short_description = _('Active Subscribers')
+
+
+@admin.register(UserSubscription)
+class UserSubscriptionAdmin(admin.ModelAdmin):
+    """Admin interface for managing user subscriptions."""
+    
+    list_display = (
+        'user_email', 'plan', 'status_badge', 'start_date',
+        'end_date', 'days_remaining_display', 'auto_renew', 'payment_method'
+    )
+    list_filter = (
+        'status', 'plan', 'auto_renew', 'payment_method',
+        'start_date', 'end_date'
+    )
+    search_fields = ('user__email', 'user__username', 'transaction_id', 'notes')
+    readonly_fields = ('created_at', 'updated_at', 'days_remaining_display')
+    date_hierarchy = 'start_date'
+    
+    fieldsets = (
+        (_('Subscription Details'), {
+            'fields': ('user', 'plan', 'status')
+        }),
+        (_('Period'), {
+            'fields': ('start_date', 'end_date', 'days_remaining_display', 'cancelled_at')
+        }),
+        (_('Payment Information'), {
+            'fields': ('payment_method', 'transaction_id', 'auto_renew')
+        }),
+        (_('Notes'), {
+            'fields': ('notes',),
+            'classes': ('collapse',)
+        }),
+        (_('Metadata'), {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    actions = ['activate_subscriptions', 'cancel_subscriptions', 'mark_expired']
+    
+    def user_email(self, obj):
+        """Display user email."""
+        return obj.user.email
+    user_email.short_description = _('User')
+    user_email.admin_order_field = 'user__email'
+    
+    def status_badge(self, obj):
+        """Display status with color coding."""
+        colors = {
+            'ACTIVE': '#28a745',
+            'EXPIRED': '#6c757d',
+            'CANCELLED': '#dc3545',
+            'TRIAL': '#17a2b8',
+        }
+        color = colors.get(obj.status, '#000')
+        return format_html(
+            '<span style="background-color: {}; color: white; padding: 3px 10px; '
+            'border-radius: 3px; font-weight: bold;">{}</span>',
+            color, obj.get_status_display()
+        )
+    status_badge.short_description = _('Status')
+    status_badge.admin_order_field = 'status'
+    
+    def days_remaining_display(self, obj):
+        """Display days remaining in subscription."""
+        if not obj.end_date:
+            return format_html('<span style="color: green;">∞ Indefinite</span>')
+        
+        days = obj.days_remaining()
+        if days == 0:
+            return format_html('<span style="color: red; font-weight: bold;">Expired</span>')
+        elif days <= 7:
+            return format_html('<span style="color: orange; font-weight: bold;">{} days</span>', days)
+        else:
+            return format_html('<span style="color: green;">{} days</span>', days)
+    days_remaining_display.short_description = _('Days Remaining')
+    
+    def activate_subscriptions(self, request, queryset):
+        """Bulk action to activate subscriptions."""
+        updated = queryset.update(status='ACTIVE')
+        self.message_user(request, f'{updated} subscription(s) activated.')
+    activate_subscriptions.short_description = _('Activate selected subscriptions')
+    
+    def cancel_subscriptions(self, request, queryset):
+        """Bulk action to cancel subscriptions."""
+        count = 0
+        for subscription in queryset:
+            subscription.cancel()
+            count += 1
+        self.message_user(request, f'{count} subscription(s) cancelled.')
+    cancel_subscriptions.short_description = _('Cancel selected subscriptions')
+    
+    def mark_expired(self, request, queryset):
+        """Bulk action to mark subscriptions as expired."""
+        updated = queryset.update(status='EXPIRED')
+        self.message_user(request, f'{updated} subscription(s) marked as expired.')
+    mark_expired.short_description = _('Mark selected subscriptions as expired')
