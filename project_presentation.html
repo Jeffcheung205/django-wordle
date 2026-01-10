@@ -477,73 +477,12 @@
                 </p>
             </div>
 
-            <div class="architecture-diagram" style="font-size: 0.95em;">
-┌─────────────────────────────────┐
-│         User (Django)           │
-├─────────────────────────────────┤
-│ PK  id                          │
-│ U   email (USERNAME_FIELD)      │
-│ U   username (auto-generated)   │
-│     first_name                  │
-│     last_name                   │
-│     password                    │
-│     is_active                   │
-│     is_staff                    │
-│     date_joined                 │
-│     last_login                  │
-└─────────────────────────────────┘
-              │
-              │ 1:1
-              ▼
-┌─────────────────────────────────┐
-│           Profile               │
-├─────────────────────────────────┤
-│ PK  id                          │
-│ FK  user_id                     │
-│     player_level (default=1)    │
-│     display_name                │
-│     experience_points (def=0)   │
-│     created_at                  │
-│     updated_at                  │
-└─────────────────────────────────┘
-              │
-              │ 1:N (Planned)
-              ▼
-┌─────────────────────────────────┐
-│        GameScore (TBD)          │
-├─────────────────────────────────┤
-│ PK  id                          │
-│ FK  profile_id                  │
-│     game_type                   │
-│     score                       │
-│     completed_at                │
-└─────────────────────────────────┘
-
-┌─────────────────────────────────┐
-│      SocialAccount              │
-│      (django-allauth)           │
-├─────────────────────────────────┤
-│ PK  id                          │
-│ FK  user_id                     │
-│     provider (Google, etc.)     │
-│     uid                         │
-│     extra_data                  │
-└─────────────────────────────────┘
+            <div class="architecture-diagram" style="text-align: center;">
+                <!-- Place the ERD PNGs in christmax/base/static/js/ with these exact filenames -->
+                <img src="christmax/base/static/js/erd%201.PNG" alt="ERD 1" style="max-width: 100%; height: auto;">
+                <img src="christmax/base/static/js/erd%202.PNG" alt="ERD 2" style="max-width: 100%; height: auto;">
+                <img src="christmax/base/static/js/erd%203.PNG" alt="ERD 3" style="max-width: 100%; height: auto;">
             </div>
-
-            <h3>Key Relationships</h3>
-            <ul>
-                <li><strong>User ↔ Profile</strong> - One-to-One (auto-created via signals)</li>
-                <li><strong>User ↔ SocialAccount</strong> - One-to-Many (OAuth providers)</li>
-                <li><strong>Profile ↔ GameScore</strong> - One-to-Many (planned for Phase I)</li>
-            </ul>
-
-            <h3>Design Principles</h3>
-            <ul>
-                <li>Email-based authentication (not username)</li>
-                <li>Separation of auth data (User) from game data (Profile)</li>
-                <li>Extensible for future game types and features</li>
-            </ul>
         </div>
 
         <!-- Slide 6: Key Features -->
